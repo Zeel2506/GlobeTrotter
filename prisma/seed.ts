@@ -42,6 +42,7 @@ type TripSeed = {
   budgetTotal?: number;
   isPublic?: boolean;
   publicSlug?: string;
+  createdAtOffset?: number; // days before today, so the analytics chart has history
   stops: StopSeed[];
 };
 
@@ -106,6 +107,7 @@ async function createTrip(userId: string, seed: TripSeed) {
       budgetTotal: seed.budgetTotal,
       isPublic: seed.isPublic ?? false,
       publicSlug: seed.publicSlug,
+      ...(seed.createdAtOffset === undefined ? {} : { createdAt: day(-seed.createdAtOffset) }),
     },
   });
 
@@ -180,6 +182,7 @@ const EUROPE_TRIP: TripSeed = {
   name: "European Summer Escape",
   description: "Two weeks through Paris, Rome and Barcelona — museums, markets and a lot of walking.",
   start: 24,
+  createdAtOffset: 40,
   end: 36,
   budgetTotal: 4400,
   stops: [
@@ -254,6 +257,7 @@ const JAPAN_TRIP: TripSeed = {
   name: "Japan Right Now",
   description: "Tokyo and Kyoto, currently in progress.",
   start: -3,
+  createdAtOffset: 20,
   end: 4,
   budgetTotal: 1800,
   stops: [
@@ -303,6 +307,7 @@ const ICELAND_TRIP: TripSeed = {
   name: "Iceland Ring Road",
   description: "Last winter's northern lights run — kept for reference and for the photos.",
   start: -95,
+  createdAtOffset: 130,
   end: -88,
   budgetTotal: 2000,
   isPublic: true,
@@ -339,6 +344,7 @@ const FRIEND_TRIP: TripSeed = {
   name: "Southeast Asia on a Shoestring",
   description: "Three weeks, two countries, under a thousand dollars. Copy it and make it yours.",
   start: 45,
+  createdAtOffset: 75,
   end: 58,
   budgetTotal: 1100,
   isPublic: true,
@@ -389,13 +395,111 @@ const FRIEND_TRIP: TripSeed = {
   ],
 };
 
+/**
+ * Background community: without it the admin analytics screen shows one month
+ * of history and every city tied at a single stop, which reads as broken rather
+ * than as new. These users give trips-over-time a curve and the top-cities table
+ * a ranking. Deterministic — no Math.random, so a re-seed reproduces the charts.
+ */
+const COMMUNITY_NAMES = [
+  "Ananya Iyer", "Rohan Desai", "Meera Nair", "Kabir Shah", "Ishita Rao",
+  "Arjun Menon", "Sara Khan", "Vikram Joshi", "Neha Kulkarni", "Dev Bhatt",
+  "Priya Ramesh", "Aditya Verma",
+];
+
+/** Weighted so the top-cities table has a clear head and a long tail. */
+const COMMUNITY_ROUTES: string[][] = [
+  ["Paris", "Rome"], ["Tokyo", "Kyoto"], ["Bangkok", "Hanoi"], ["Paris", "Barcelona"],
+  ["Rome", "Santorini"], ["Tokyo"], ["New York City"], ["Lisbon", "Barcelona"],
+  ["Dubai", "Istanbul"], ["Paris"], ["Bali-less", "Ubud"], ["Cape Town"],
+  ["Kyoto", "Seoul"], ["Rome"], ["Prague", "Amsterdam"], ["Tokyo", "Seoul"],
+  ["Marrakech"], ["Mexico City"], ["Paris", "Amsterdam"], ["Bangkok"],
+];
+
+async function seedCommunity() {
+  const passwordHash = await hash(PASSWORD, 10);
+  const cityRows = await prisma.city.findMany({ select: { id: true, name: true } });
+  const cities = new Map(cityRows.map((c) => [c.name, c.id]));
+
+  const activitiesByCity = new Map<string, string[]>();
+  for (const a of await prisma.activity.findMany({
+    select: { id: true, cityId: true },
+    orderBy: { name: "asc" },
+  })) {
+    const list = activitiesByCity.get(a.cityId);
+    if (list) list.push(a.id);
+    else activitiesByCity.set(a.cityId, [a.id]);
+  }
+
+  for (const [i, name] of COMMUNITY_NAMES.entries()) {
+    const email = `${name.split(" ")[0].toLowerCase()}${i}@globetrotter.demo`;
+    const createdAt = day(-((i * 13) % 170) - 5);
+
+    const user = await prisma.user.upsert({
+      where: { email },
+      update: {},
+      create: { name, email, passwordHash, role: "USER", createdAt },
+    });
+
+    // 1-2 trips each, spread back over the last six months.
+    const tripCount = (i % 2) + 1;
+    for (let t = 0; t < tripCount; t++) {
+      const route = COMMUNITY_ROUTES[(i * 2 + t) % COMMUNITY_ROUTES.length].filter((c) => cities.has(c));
+      if (route.length === 0) continue;
+
+      const startOffset = ((i * 17 + t * 29) % 240) - 120; // some past, some future
+      const trip = await prisma.trip.create({
+        data: {
+          userId: user.id,
+          name: `${route.join(" & ")} trip`,
+          startDate: day(startOffset),
+          endDate: day(startOffset + route.length * 3),
+          createdAt: day(-((i * 11 + t * 23) % 165) - 3),
+        },
+      });
+
+      for (const [order, cityName] of route.entries()) {
+        const cityId = cities.get(cityName)!;
+        const stop = await prisma.stop.create({
+          data: {
+            tripId: trip.id,
+            cityId,
+            startDate: day(startOffset + order * 3),
+            endDate: day(startOffset + order * 3 + 3),
+            order,
+          },
+        });
+
+        // A rotating slice of each city's catalog, so the top-activities table
+        // ranks instead of showing everything tied at one.
+        const pool = activitiesByCity.get(cityId) ?? [];
+        const picks = [0, 1, 2].map((n) => pool[(i + t + n * 3) % Math.max(1, pool.length)]).filter(Boolean);
+        for (const [n, activityId] of [...new Set(picks)].entries()) {
+          await prisma.itineraryItem.create({
+            data: {
+              stopId: stop.id,
+              activityId,
+              date: day(startOffset + order * 3 + n),
+              order: n,
+            },
+          });
+        }
+      }
+    }
+  }
+}
+
 async function main() {
   console.log("GlobeTrotter seed starting…");
 
-  // Wipe demo trip data only; the catalog is upserted, users are kept.
+  // Wipe demo trip data; the catalog is upserted, the three demo logins are kept
+  // so a re-seed mid-demo does not invalidate an open session.
   await prisma.trip.deleteMany({
     where: { user: { email: { in: ["user@demo.com", "friend@demo.com", "admin@demo.com"] } } },
   });
+  // Community accounts are disposable — remove them wholesale so a re-seed does
+  // not stack duplicate trips onto them.
+  await prisma.user.deleteMany({ where: { email: { endsWith: "@globetrotter.demo" } } });
 
   await seedCatalog();
 
@@ -407,6 +511,8 @@ async function main() {
   await createTrip(user.id, JAPAN_TRIP);
   await createTrip(user.id, ICELAND_TRIP);
   await createTrip(friend.id, FRIEND_TRIP);
+
+  await seedCommunity();
 
   // A couple of saved destinations so the profile screen is not empty.
   const savedCities = await prisma.city.findMany({
