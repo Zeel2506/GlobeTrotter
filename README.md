@@ -69,7 +69,8 @@ GlobeTrotter turns the whole thing into one structured, costed, shareable artefa
 | 🔗 | **Public Sharing** | Publish to an unguessable link anyone can open without an account |
 | 📑 | **Copy Trip** | Any signed-in visitor can deep-clone a shared trip into their own account |
 | ❤️ | **Saved Destinations** | Heart cities while browsing and revisit them from the profile |
-| 📊 | **Admin Analytics** | Adoption over time, top destinations, top activities, user management, CSV export |
+| 📊 | **Admin Analytics** | Adoption over time, top destinations, top activities, CSV export |
+| 🗂️ | **Catalog Management** | Admin CRUD over the 31 cities and 310 activities, with in-use guards |
 
 ---
 
@@ -283,6 +284,8 @@ Self-hosted **ABC Diatype** (5 weights, `next/font/local`). MakeMyTrip-derived p
 | `/activities` | USER, ADMIN | Activity search — category, cost, duration filters |
 | `/profile` | USER, ADMIN | Profile, language, saved destinations, delete account |
 | `/admin` | **ADMIN** | Analytics dashboard |
+| `/admin/cities` | **ADMIN** | City catalog — create, edit, delete |
+| `/admin/activities` | **ADMIN** | Activity catalog — create, edit, delete |
 | `/admin/users` | **ADMIN** | User management |
 
 ### API — 30 route handlers
@@ -457,7 +460,7 @@ Run `npm run db:reset` first. Full presenter version in [`docs/DEMO_SCRIPT.md`](
 7. Try adding a **Tokyo** activity to a **Paris** stop → rejected with a clear message
 8. **Reorder** stops by drag, then by arrow buttons
 9. **Itinerary** → timeline, then toggle to calendar
-10. **Budget** → $3,303 of $4,400, avg $275.25/day, over-budget day flagged
+10. **Budget** → ₹2,74,250 of ₹3,65,200, avg ₹22,854/day, over-budget days flagged
 11. **Share** → copy the link → open in a **private window** (still works)
 12. **Un-share** → link 404s → **re-share** → same slug returns
 13. Sign in as `friend@demo.com` → **Copy Trip** → identical totals, private clone
@@ -469,6 +472,12 @@ Run `npm run db:reset` first. Full presenter version in [`docs/DEMO_SCRIPT.md`](
 ## ⚙️ Cross-Cutting Design Decisions
 
 Full reasoning in [`docs/DECISIONS.md`](docs/DECISIONS.md). The ones that shaped the build:
+
+### Currency is Indian Rupees
+
+Amounts are stored as plain numbers and formatted with `Intl.NumberFormat("en-IN", { currency: "INR" })`
+— the `en-IN` locale matters, because it produces the lakh grouping (`₹2,74,250`) rather than
+`₹274,250`, which reads as foreign to the audience this is built for.
 
 ### Money is computed in exactly one place
 

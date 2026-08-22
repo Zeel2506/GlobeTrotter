@@ -24,7 +24,7 @@ Sign up a brand-new account to show the empty state, then log in as `user@demo.c
 
 Dashboard shows: welcome line, **European Summer Escape** counting down 24 days, recommended
 destinations the user has no stop in, and budget highlights for **Japan Right Now** — the trip that
-is currently over budget ($1,908 spent against a $1,800 budget).
+is currently over budget (₹1,58,350 spent against a ₹1,49,400 budget).
 
 > Talking point: the recommendation list excludes cities already on the user's itinerary.
 
@@ -66,18 +66,18 @@ Open the budget screen for **European Summer Escape**.
 
 | | |
 |---|---|
-| Grand total | **$3,303** |
-| Budget | **$4,400** |
+| Grand total | **₹2,74,250** |
+| Budget | **₹3,65,200** |
 | Nights | 12 |
-| Average per day | **$275.25** |
-| Daily budget | **$366.67** |
+| Average per day | **₹22,854** |
+| Daily budget | **₹30,433** |
 | Over-budget days | the Versailles + Moulin Rouge day pulses red |
 
 > Talking point: an undated expense like "hotel, 4 nights" is spread across that stop's days, not
 > dumped on day one. That is why the per-day chart reads as a real spending pattern. And
 > `sum(per-day) === grand total` always — nothing is lost or double-counted.
 
-Now open **Japan Right Now** to show the other state: overall over budget, $1,908 against $1,800.
+Now open **Japan Right Now** to show the other state: overall over budget, ₹1,58,350 against ₹1,49,400.
 
 ## 8. Share → public page (1 min)
 

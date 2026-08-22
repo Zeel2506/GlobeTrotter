@@ -27,6 +27,8 @@ export const MAIN_NAV: NavItem[] = [
 
 export const ADMIN_NAV: NavItem[] = [
   { href: "/admin", label: "Analytics", icon: BarChart3 },
+  { href: "/admin/cities", label: "Cities", icon: Compass },
+  { href: "/admin/activities", label: "Activities", icon: Ticket },
   { href: "/admin/users", label: "Users", icon: Users },
 ];
 

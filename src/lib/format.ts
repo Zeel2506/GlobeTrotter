@@ -2,15 +2,17 @@
 // average and over-budget flag arrives already computed from the API
 // (docs/SPEC.md §4, DESIGN_SYSTEM.md §10 rule 1).
 
-const money = new Intl.NumberFormat("en-US", {
+// en-IN gives the lakh/crore grouping (1,23,456) that Indian users expect —
+// en-US with an INR symbol would render 123,456 and read as foreign.
+const money = new Intl.NumberFormat("en-IN", {
   style: "currency",
-  currency: "USD",
+  currency: "INR",
   maximumFractionDigits: 0,
 });
 
-const moneyPrecise = new Intl.NumberFormat("en-US", {
+const moneyPrecise = new Intl.NumberFormat("en-IN", {
   style: "currency",
-  currency: "USD",
+  currency: "INR",
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });

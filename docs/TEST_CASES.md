@@ -59,7 +59,7 @@ value below assumes a fresh seed.
 **Expected:** European Summer Escape = **upcoming**, Japan Right Now = **ongoing**, Iceland Ring Road = **past**. Each tab returns only its own trips; **All** returns 3.
 
 ### B4 Trip card figures
-**Expected:** European Summer Escape shows 3 stops and a total of **$3,303**.
+**Expected:** European Summer Escape shows 3 stops and a total of **₹2,74,250**.
 
 ### B5 Cover photo size cap
 **Steps:** Attempt an image > 2 MB.
@@ -135,20 +135,20 @@ value below assumes a fresh seed.
 
 ### E1 🔴 Category breakdown
 **Steps:** Open the budget screen for European Summer Escape.
-**Expected:** Transport **600**, Stay **1,135**, Activities **1,088**, Meals **420**, Other **60**, Grand **3,303**.
+**Expected:** Transport **₹49,800**, Stay **₹94,200**, Activities **₹90,400**, Meals **₹34,850**, Other **₹5,000**, Grand **₹2,74,250**.
 
 ### E2 🔴 Totals reconcile
 **Expected:** `sum(perDay) === totals.grand` exactly. No rounding drift.
 
 ### E3 Average per day
-**Expected:** 12 nights, **$275.25**/day.
+**Expected:** 12 nights, **₹22,854**/day.
 
 ### E4 🔴 Over-budget day flagged
-**Expected:** Budget 4,400 → daily 366.67. The Versailles + Moulin Rouge day exceeds it and pulses red, then holds a static red.
+**Expected:** Budget ₹3,65,200 → daily ₹30,433. The Versailles + Moulin Rouge day exceeds it and pulses red, then holds a static red.
 
 ### E5 Overall over-budget
 **Steps:** Open Japan Right Now.
-**Expected:** 1,908 spent against 1,800 — flagged as over budget overall.
+**Expected:** ₹1,58,350 spent against ₹1,49,400 — flagged as over budget overall.
 
 ### E6 No budget → no alerts
 **Steps:** Clear `budgetTotal`.
@@ -216,7 +216,7 @@ value below assumes a fresh seed.
 
 ---
 
-## H. Admin (H1–H8)
+## H. Admin (H1–H12)
 
 ### H1 🔴🔒 USER cannot reach `/admin`
 **Steps:** As `user@demo.com`, visit `/admin`.
@@ -241,7 +241,22 @@ value below assumes a fresh seed.
 ### H7 🔒 Admin cannot change their own role or suspend themselves
 **Expected:** Buttons disabled; a forced `PATCH /api/admin/users/{self}` returns **422**.
 
-### H8 🔒 Last active admin protected
+### H8 🔴 City catalog management
+**Steps:** `/admin/cities` → search, filter by region, add a city, edit it.
+**Expected:** Table reflects changes after save. Cost index accepts 1–100 only.
+
+### H9 🔒 A city in use cannot be deleted
+**Steps:** Try to delete Paris (used by trip stops).
+**Expected:** Delete disabled with a tooltip; a forced `DELETE /api/cities/{id}` returns **409** naming the stop count.
+
+### H10 Activity catalog management
+**Steps:** `/admin/activities` → filter by city and category, add an activity, edit its cost.
+**Expected:** Changes persist. The new cost appears on `/activities` and in any *future* budget — existing itinerary items keep their own `costOverride` if set.
+
+### H11 🔒 A scheduled activity cannot be deleted
+**Expected:** Delete disabled; a forced request returns **409**.
+
+### H12 🔒 Last active admin protected
 **Steps:** With one admin remaining, try to demote or suspend them.
 **Expected:** **422** — the platform must not become unadministrable.
 
@@ -286,6 +301,6 @@ value below assumes a fresh seed.
 | Budget | 7 | 3 | — |
 | Sharing & copy | 7 | 3 | 4 |
 | Discovery & profile | 7 | — | 1 |
-| Admin | 8 | 2 | 4 |
+| Admin | 12 | 3 | 6 |
 | Cross-cutting | 6 | 1 | — |
-| **Total** | **63** | **18** | **16** |
+| **Total** | **67** | **19** | **18** |

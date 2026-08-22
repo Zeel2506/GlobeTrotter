@@ -77,7 +77,7 @@ override. `hackathon-brief/` is kept as reference material; `starter-files/` is 
 
 ### D-16 · Undated expenses are spread across their stop, not dumped on day one
 Found during W3 smoke-testing: with every hotel and flight attributed to the trip's first day, the
-per-day chart showed a single $2,096 spike and twelve flat days, and that one artificial spike was the
+per-day chart showed a single outsized spike and twelve flat days, and that one artificial spike was the
 only thing tripping the over-budget flag. An undated expense is one that covers the whole stop
 ("hotel, 4 nights"), so it is now divided evenly across that stop's days. Totals are unchanged and
 `sum(perDay) === totals.grand` still holds; the chart now reads as a real spending pattern.

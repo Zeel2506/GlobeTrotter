@@ -187,7 +187,7 @@ const EUROPE_TRIP: TripSeed = {
   start: 24,
   createdAtOffset: 40,
   end: 36,
-  budgetTotal: 4400,
+  budgetTotal: 365200,
   stops: [
     {
       city: "Paris",
@@ -206,10 +206,10 @@ const EUROPE_TRIP: TripSeed = {
         { activity: "Luxembourg Gardens Picnic", dayOffset: 4, startTime: "12:00" },
       ],
       expenses: [
-        { category: "STAY", description: "Marais apartment, 4 nights", amount: 520 },
-        { category: "TRANSPORT", description: "Flights into Paris", amount: 340 },
-        { category: "MEALS", description: "Breakfasts and lunches", amount: 160 },
-        { category: "TRANSPORT", description: "Metro carnet", amount: 20, dayOffset: 0 },
+        { category: "STAY", description: "Marais apartment, 4 nights", amount: 43150 },
+        { category: "TRANSPORT", description: "Flights into Paris", amount: 28200 },
+        { category: "MEALS", description: "Breakfasts and lunches", amount: 13300 },
+        { category: "TRANSPORT", description: "Metro carnet", amount: 1650, dayOffset: 0 },
       ],
     },
     {
@@ -227,9 +227,9 @@ const EUROPE_TRIP: TripSeed = {
         { activity: "Appian Way Bike Ride", dayOffset: 8, startTime: "09:30" },
       ],
       expenses: [
-        { category: "STAY", description: "Trastevere guesthouse, 3 nights", amount: 330 },
-        { category: "TRANSPORT", description: "Paris to Rome night train", amount: 145, dayOffset: 4 },
-        { category: "MEALS", description: "Coffee, gelato and market lunches", amount: 120 },
+        { category: "STAY", description: "Trastevere guesthouse, 3 nights", amount: 27400 },
+        { category: "TRANSPORT", description: "Paris to Rome night train", amount: 12050, dayOffset: 4 },
+        { category: "MEALS", description: "Coffee, gelato and market lunches", amount: 9950 },
       ],
     },
     {
@@ -247,10 +247,10 @@ const EUROPE_TRIP: TripSeed = {
         { activity: "Flamenco at Palau Dalmases", dayOffset: 12, startTime: "20:30" },
       ],
       expenses: [
-        { category: "STAY", description: "Eixample hotel, 3 nights", amount: 285 },
-        { category: "TRANSPORT", description: "Rome to Barcelona flight", amount: 95, dayOffset: 8 },
-        { category: "MEALS", description: "Dinners and beach snacks", amount: 140 },
-        { category: "OTHER", description: "Travel insurance", amount: 60 },
+        { category: "STAY", description: "Eixample hotel, 3 nights", amount: 23650 },
+        { category: "TRANSPORT", description: "Rome to Barcelona flight", amount: 7900, dayOffset: 8 },
+        { category: "MEALS", description: "Dinners and beach snacks", amount: 11600 },
+        { category: "OTHER", description: "Travel insurance", amount: 5000 },
       ],
     },
   ],
@@ -262,7 +262,7 @@ const JAPAN_TRIP: TripSeed = {
   start: -3,
   createdAtOffset: 20,
   end: 4,
-  budgetTotal: 1800,
+  budgetTotal: 149400,
   stops: [
     {
       city: "Tokyo",
@@ -279,9 +279,9 @@ const JAPAN_TRIP: TripSeed = {
         { activity: "Mount Fuji & Hakone Day Trip", dayOffset: 3, startTime: "07:30" },
       ],
       expenses: [
-        { category: "STAY", description: "Shinjuku hotel, 4 nights", amount: 430 },
-        { category: "TRANSPORT", description: "JR Pass, 7 days", amount: 240, dayOffset: 0 },
-        { category: "MEALS", description: "Konbini and ramen", amount: 110 },
+        { category: "STAY", description: "Shinjuku hotel, 4 nights", amount: 35700 },
+        { category: "TRANSPORT", description: "JR Pass, 7 days", amount: 19900, dayOffset: 0 },
+        { category: "MEALS", description: "Konbini and ramen", amount: 9150 },
       ],
     },
     {
@@ -299,8 +299,8 @@ const JAPAN_TRIP: TripSeed = {
         { activity: "Nara Deer Park Day Trip", dayOffset: 7, startTime: "08:30" },
       ],
       expenses: [
-        { category: "STAY", description: "Gion machiya, 4 nights", amount: 380 },
-        { category: "MEALS", description: "Breakfasts and coffee", amount: 90 },
+        { category: "STAY", description: "Gion machiya, 4 nights", amount: 31550 },
+        { category: "MEALS", description: "Breakfasts and coffee", amount: 7450 },
       ],
     },
   ],
@@ -312,7 +312,7 @@ const ICELAND_TRIP: TripSeed = {
   start: -95,
   createdAtOffset: 130,
   end: -88,
-  budgetTotal: 2000,
+  budgetTotal: 166000,
   isPublic: true,
   publicSlug: "iceland-ring-road-demo",
   stops: [
@@ -334,10 +334,10 @@ const ICELAND_TRIP: TripSeed = {
         { activity: "Laugavegur Design Shops", dayOffset: 6, startTime: "11:00" },
       ],
       expenses: [
-        { category: "STAY", description: "Downtown apartment, 7 nights", amount: 690 },
-        { category: "TRANSPORT", description: "4x4 rental with winter tyres", amount: 420 },
-        { category: "MEALS", description: "Groceries and eating out", amount: 260 },
-        { category: "OTHER", description: "Fuel", amount: 130 },
+        { category: "STAY", description: "Downtown apartment, 7 nights", amount: 57250 },
+        { category: "TRANSPORT", description: "4x4 rental with winter tyres", amount: 34850 },
+        { category: "MEALS", description: "Groceries and eating out", amount: 21600 },
+        { category: "OTHER", description: "Fuel", amount: 10800 },
       ],
     },
   ],
@@ -349,7 +349,7 @@ const FRIEND_TRIP: TripSeed = {
   start: 45,
   createdAtOffset: 75,
   end: 58,
-  budgetTotal: 1100,
+  budgetTotal: 91300,
   isPublic: true,
   publicSlug: "sea-shoestring-demo",
   stops: [
@@ -368,9 +368,9 @@ const FRIEND_TRIP: TripSeed = {
         { activity: "Traditional Thai Massage", dayOffset: 5, startTime: "16:00" },
       ],
       expenses: [
-        { category: "STAY", description: "Hostel in Phra Nakhon, 5 nights", amount: 75 },
-        { category: "TRANSPORT", description: "Return flights", amount: 380 },
-        { category: "MEALS", description: "Street food, all week", amount: 55 },
+        { category: "STAY", description: "Hostel in Phra Nakhon, 5 nights", amount: 6200 },
+        { category: "TRANSPORT", description: "Return flights", amount: 31550 },
+        { category: "MEALS", description: "Street food, all week", amount: 4550 },
       ],
     },
     {
@@ -390,9 +390,9 @@ const FRIEND_TRIP: TripSeed = {
         { activity: "Dong Xuan Market", dayOffset: 13, startTime: "10:00" },
       ],
       expenses: [
-        { category: "STAY", description: "Old Quarter guesthouse, 8 nights", amount: 96 },
-        { category: "TRANSPORT", description: "Bangkok to Hanoi flight", amount: 85, dayOffset: 5 },
-        { category: "MEALS", description: "Phở, banh mi, egg coffee", amount: 70 },
+        { category: "STAY", description: "Old Quarter guesthouse, 8 nights", amount: 7950 },
+        { category: "TRANSPORT", description: "Bangkok to Hanoi flight", amount: 7050, dayOffset: 5 },
+        { category: "MEALS", description: "Phở, banh mi, egg coffee", amount: 5800 },
       ],
     },
   ],
