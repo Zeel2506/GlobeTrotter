@@ -34,9 +34,10 @@ export function HeroArc({ cards }: { cards: ArcCard[] }) {
         transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
         className="page-shell relative z-10 -mt-[15vh] flex flex-col items-center gap-7 pb-4 text-center sm:-mt-[17vh]"
       >
-        <h1 className="display-1 max-w-4xl">
-          Plan multi-city trips,{" "}
-          <span className="display-oblique text-primary">beautifully</span>
+        <h1 className="hero-statement max-w-5xl">
+          Plan every city, every day
+          <br className="hidden sm:block" /> and{" "}
+          <span className="display-oblique">every dollar</span> of the trip.
         </h1>
 
         <p className="max-w-2xl text-[17px] leading-[1.75] text-foreground-muted">

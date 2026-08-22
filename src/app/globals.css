@@ -167,10 +167,21 @@
     font-family: var(--font-diatype), ui-sans-serif, sans-serif;
     font-style: italic;
     font-synthesis: style;
-    /* Inherits the surrounding weight on purpose: 400 inside .statement, 800
-       inside the hero's .display-1. Pinning it to 400 made the hero's leaning
-       word look thin against the upright words beside it. */
-    font-weight: inherit;
+    /* Always 400, even inside an 800-weight headline. The weight drop is the
+       point: the leaning phrase reads as an aside against the bold around it. */
+    font-weight: 400;
+  }
+
+  /* The hero headline: statement weight and colour, at hero scale. Deliberately
+     400, not the 800 of .display-1 — the hero and the statement band should read
+     as the same voice. */
+  .hero-statement {
+    font-family: var(--font-diatype), ui-sans-serif, sans-serif;
+    font-size: clamp(2.4rem, 6.2vw, 4.6rem);
+    line-height: 1.06;
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
   }
 
   /* The large two-line statement band. Lighter and wider than .display-1 — it
