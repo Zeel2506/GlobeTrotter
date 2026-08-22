@@ -4,6 +4,7 @@ import { Clock, MapPin, Plus } from "lucide-react";
 import { ImageFallback } from "@/components/image-fallback";
 import { CategoryChip } from "@/components/category-chip";
 import { SpotlightCard } from "@/components/motion/spotlight-card";
+import { GlareOverlay } from "@/components/motion/glare-hover";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatMoney, formatDuration } from "@/lib/format";
@@ -32,9 +33,10 @@ export function ActivityCard({
       <button
         type="button"
         onClick={() => onQuickView?.(activity)}
-        className="block overflow-hidden text-left"
+        className="relative block overflow-hidden text-left"
         aria-label={`Quick view ${activity.name}`}
       >
+        <GlareOverlay />
         <ImageFallback
           src={activity.imageUrl}
           name={activity.name}

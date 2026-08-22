@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { ArrowLeft, Globe2 } from "lucide-react";
 import { auth } from "@/auth";
 import { AdminSidebar } from "./sidebar";
+import { PageTransition } from "@/components/motion/page-transition";
 
 /**
  * Mode A shell — DESIGN_SYSTEM.md §5. Deliberately unlike the consumer app:
@@ -50,7 +51,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="sticky top-0 z-30 border-b border-border bg-surface px-4 lg:hidden">
           <AdminSidebar horizontal />
         </div>
-        <main className="min-w-0 flex-1 p-4 md:p-8">{children}</main>
+        <main className="min-w-0 flex-1 p-4 md:p-8">
+          <PageTransition>{children}</PageTransition>
+        </main>
       </div>
     </div>
   );

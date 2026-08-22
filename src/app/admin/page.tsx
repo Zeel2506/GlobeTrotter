@@ -3,6 +3,8 @@ import { Users, Map as MapIcon, Globe2, TrendingUp } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { AdminHeader } from "./header";
 import { TripsOverTimeChart } from "./analytics-charts";
+import { BlurFade } from "@/components/motion/blur-fade";
+import { CountUp } from "@/components/motion/count-up";
 import { round2 } from "@/lib/validators";
 
 export const metadata: Metadata = { title: "Analytics · Admin" };
@@ -102,15 +104,25 @@ export default async function AdminAnalyticsPage() {
       />
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.label} className="rounded-[var(--radius)] border border-border bg-surface p-4">
-            <div className="flex items-center gap-2 text-foreground-subtle">
-              <s.icon className="size-3.5" />
-              <span className="text-[12px] font-medium uppercase tracking-wide">{s.label}</span>
+        {stats.map((s, i) => (
+          <BlurFade key={s.label} delay={i * 0.06} yOffset={10}>
+            <div className="group relative h-full overflow-hidden rounded-[var(--radius)] border border-border bg-surface p-4 transition-all duration-[var(--dur)] hover:border-border-strong hover:shadow-[var(--shadow)]">
+              {/* A hairline that fills in from the left on hover. Mode A gets one
+                  restrained signal that a tile is interactive, not a lift. */}
+              <span
+                aria-hidden
+                className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-primary transition-transform duration-[var(--dur)] ease-[var(--ease)] group-hover:scale-x-100"
+              />
+              <div className="flex items-center gap-2 text-foreground-subtle">
+                <s.icon className="size-3.5" />
+                <span className="text-[12px] font-medium uppercase tracking-wide">{s.label}</span>
+              </div>
+              <p className="tnum mt-1.5 text-[26px] font-bold leading-none">
+                <CountUp to={Number(s.value)} duration={1.1} />
+              </p>
+              <p className="mt-1 text-[12px] text-foreground-subtle">{s.hint}</p>
             </div>
-            <p className="tnum mt-1.5 text-[26px] font-bold leading-none">{s.value}</p>
-            <p className="mt-1 text-[12px] text-foreground-subtle">{s.hint}</p>
-          </div>
+          </BlurFade>
         ))}
       </div>
 

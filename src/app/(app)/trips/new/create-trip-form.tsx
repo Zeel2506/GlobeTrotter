@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,12 +14,16 @@ type FieldErrors = Record<string, string[] | undefined>;
 
 export function CreateTripForm() {
   const router = useRouter();
+  // The landing hero's "Plan a trip" tab hands over name/start/end, so arriving
+  // from it lands on a form that is already filled in rather than empty.
+  const params = useSearchParams();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [issues, setIssues] = useState<FieldErrors>({});
-  const [name, setName] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [name, setName] = useState(() => params.get("name") ?? "");
+  const [startDate, setStartDate] = useState(() => params.get("start") ?? "");
+  const [endDate, setEndDate] = useState(() => params.get("end") ?? "");
   const [cover, setCover] = useState<string | null>(null);
 
   // Client-side guard only mirrors the server rule for instant feedback; the

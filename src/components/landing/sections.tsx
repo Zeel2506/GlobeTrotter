@@ -31,7 +31,10 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_80%_at_15%_-10%,#ffedd5_0%,transparent_55%),radial-gradient(90%_70%_at_95%_0%,#ccfbf1_0%,transparent_60%)]"
       />
 
-      <div className="page-shell grid items-center gap-12 py-14 lg:grid-cols-[1.05fr_.95fr] lg:py-20">
+      {/* Centred headline over a full-bleed wash, with the planner card straddling
+          the section below it — the arrangement every large travel portal uses,
+          because the search box is the product's front door. */}
+      <div className="page-shell pb-4 pt-14 text-center lg:pt-20">
         <motion.div variants={stagger(0.08)} initial="hidden" animate="show">
           <motion.p variants={riseIn} className="overline mb-4 text-primary">
             {HERO.eyebrow}
@@ -56,16 +59,37 @@ export function Hero() {
 
           <motion.p
             variants={riseIn}
-            className="mt-5 max-w-xl text-lg leading-relaxed text-foreground-muted"
+            className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-foreground-muted"
           >
             {HERO.subtitle}
           </motion.p>
+        </motion.div>
+      </div>
 
-          <motion.div variants={riseIn} className="mt-8">
-            <HeroSearch />
-          </motion.div>
+      <div className="page-shell pb-16">
+        <div className="mx-auto max-w-5xl">
+          <HeroSearch />
+        </div>
+      </div>
+    </section>
+  );
+}
 
-          <motion.div variants={riseIn} className="mt-6 flex flex-wrap gap-3">
+/** The CSS-built itinerary visual, promoted to its own band under the hero. */
+export function PreviewBand() {
+  return (
+    <section className="border-t border-border bg-surface-muted/40">
+      <div className="page-shell grid items-center gap-10 py-16 lg:grid-cols-[.95fr_1.05fr] lg:py-20">
+        <motion.div {...reveal} variants={riseIn}>
+          <p className="overline mb-3 text-primary">The itinerary builder</p>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Every day accounted for, every cost with it
+          </h2>
+          <p className="mt-4 max-w-lg text-foreground-muted">
+            Stops in the order you travel them, activities on the day you do them, and a
+            running total that never needs a spreadsheet.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
             <Button asChild size="lg">
               <Link href={HERO.primaryCta.href}>
                 {HERO.primaryCta.label}
@@ -75,12 +99,10 @@ export function Hero() {
             <Button asChild size="lg" variant="secondary">
               <Link href={HERO.secondaryCta.href}>{HERO.secondaryCta.label}</Link>
             </Button>
-          </motion.div>
+          </div>
         </motion.div>
 
-        <div className="lg:pl-6">
-          <ItineraryPreview />
-        </div>
+        <ItineraryPreview />
       </div>
     </section>
   );
