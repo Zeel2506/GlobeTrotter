@@ -3,6 +3,7 @@
 import { Clock, MapPin, Plus } from "lucide-react";
 import { ImageFallback } from "@/components/image-fallback";
 import { CategoryChip } from "@/components/category-chip";
+import { SpotlightCard } from "@/components/motion/spotlight-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatMoney, formatDuration } from "@/lib/format";
@@ -21,23 +22,24 @@ export function ActivityCard({
   className?: string;
 }) {
   return (
-    <div
+    <SpotlightCard
+      chrome={false}
       className={cn(
-        "hover-lift flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface shadow-[var(--shadow)]",
+        "hover-lift group flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface shadow-[var(--shadow)]",
         className,
       )}
     >
       <button
         type="button"
         onClick={() => onQuickView?.(activity)}
-        className="block text-left"
+        className="block overflow-hidden text-left"
         aria-label={`Quick view ${activity.name}`}
       >
         <ImageFallback
           src={activity.imageUrl}
           name={activity.name}
           variant="activity"
-          className="aspect-[16/10] w-full"
+          className="aspect-[16/10] w-full transition-transform duration-[600ms] ease-[var(--ease)] group-hover:scale-[1.07]"
         />
       </button>
 
@@ -78,6 +80,6 @@ export function ActivityCard({
           </Button>
         )}
       </div>
-    </div>
+    </SpotlightCard>
   );
 }

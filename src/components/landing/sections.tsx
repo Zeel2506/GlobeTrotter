@@ -16,6 +16,7 @@ import {
   FEATURES,
   STEPS,
   CTA_BAND,
+  FOOTER_COLUMNS,
   FOOTER_NOTE,
 } from "@/config/landing";
 import { riseIn, stagger, reveal } from "@/lib/motion";
@@ -217,14 +218,46 @@ export function CtaBand() {
 export function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
-      <div className="page-shell flex flex-col items-center justify-between gap-4 py-10 sm:flex-row">
-        <Link href="/" className="flex items-center gap-2 font-semibold">
-          <span className="flex size-7 items-center justify-center rounded-[9px] bg-primary text-primary-fg">
-            <Globe2 className="size-4" />
-          </span>
-          GlobeTrotter
-        </Link>
-        <p className="text-[13px] text-foreground-subtle">{FOOTER_NOTE}</p>
+      <div className="page-shell grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+        <div className="max-w-xs">
+          <Link href="/" className="flex items-center gap-2 font-semibold">
+            <span className="flex size-8 items-center justify-center rounded-[10px] bg-primary text-primary-fg">
+              <Globe2 className="size-[18px]" />
+            </span>
+            <span className="text-[17px] tracking-tight">GlobeTrotter</span>
+          </Link>
+          <p className="mt-3 text-[14px] leading-relaxed text-foreground-muted">
+            Multi-city itineraries, a budget that keeps itself honest, and one link that
+            shares the whole plan.
+          </p>
+        </div>
+
+        {FOOTER_COLUMNS.map((col) => (
+          <nav key={col.heading} aria-label={col.heading}>
+            <h3 className="overline mb-3 text-foreground-subtle">{col.heading}</h3>
+            <ul className="flex flex-col gap-2">
+              {col.links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-[14px] text-foreground-muted transition-colors hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+      </div>
+
+      <div className="border-t border-border">
+        <div className="page-shell flex flex-col items-center justify-between gap-2 py-5 sm:flex-row">
+          <p className="text-[13px] text-foreground-subtle">{FOOTER_NOTE}</p>
+          <p className="text-[13px] text-foreground-subtle">
+            © {new Date().getFullYear()} GlobeTrotter
+          </p>
+        </div>
       </div>
     </footer>
   );

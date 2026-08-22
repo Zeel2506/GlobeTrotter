@@ -41,12 +41,16 @@ export function TripCard({
       )}
     >
       <Link href={`/trips/${trip.id}`} className="block">
-        <div className="relative">
+        <div className="relative overflow-hidden">
           <ImageFallback
             src={cover}
             name={trip.firstCityName ?? trip.name}
             variant="trip"
-            className="aspect-[16/10] w-full"
+            className="aspect-[16/10] w-full transition-transform duration-[600ms] ease-[var(--ease)] group-hover:scale-[1.07]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 to-transparent opacity-0 transition-opacity duration-[var(--dur)] group-hover:opacity-100"
           />
           <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
             <StatusBadge status={trip.status} />

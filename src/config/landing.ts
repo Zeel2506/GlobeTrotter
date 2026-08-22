@@ -123,3 +123,30 @@ export const POPULAR_SEARCHES = ["Paris", "Tokyo", "Japan", "Europe", "Asia", "B
 
 /** Rotated through the hero headline. Kept short so the line never wraps mid-swap. */
 export const HERO_DESTINATIONS = ["Paris", "Tokyo", "Rome", "Ubud", "Lisbon", "Cape Town"];
+
+/** Footer columns. Every href is a route that exists — no dead links on a demo. */
+export const FOOTER_COLUMNS: { heading: string; links: { label: string; href: string }[] }[] = [
+  {
+    heading: "Plan",
+    links: [
+      { label: "Dashboard", href: "/dashboard" },
+      { label: "My trips", href: "/trips" },
+      { label: "Start a new trip", href: "/trips/new" },
+    ],
+  },
+  {
+    heading: "Discover",
+    links: [
+      { label: "Browse cities", href: "/cities" },
+      { label: "Find activities", href: "/activities" },
+    ],
+  },
+  {
+    heading: "Account",
+    links: [
+      { label: "Profile & settings", href: "/profile" },
+      { label: "Log in", href: "/login" },
+      { label: "Create an account", href: "/signup" },
+    ],
+  },
+];
