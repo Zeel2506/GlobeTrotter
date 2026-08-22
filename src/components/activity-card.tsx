@@ -3,9 +3,7 @@
 import { Clock, MapPin, Plus } from "lucide-react";
 import { ImageFallback } from "@/components/image-fallback";
 import { CategoryChip } from "@/components/category-chip";
-import { SpotlightCard } from "@/components/motion/spotlight-card";
-import { TiltCard } from "@/components/motion/tilt-card";
-import { GlareOverlay } from "@/components/motion/glare-hover";
+import { HoverCard } from "@/components/motion/hover-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatMoney, formatDuration } from "@/lib/format";
@@ -24,11 +22,10 @@ export function ActivityCard({
   className?: string;
 }) {
   return (
-    <TiltCard className={cn("h-full", className)} amplitude={5}>
-    <SpotlightCard
-      chrome={false}
+    <HoverCard className={cn("h-full", className)}>
+    <div
       className={cn(
-        "hover-lift group flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface shadow-[var(--shadow)]",
+        "group flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface",
       )}
     >
       <button
@@ -37,7 +34,6 @@ export function ActivityCard({
         className="relative block overflow-hidden text-left"
         aria-label={`Quick view ${activity.name}`}
       >
-        <GlareOverlay />
         <ImageFallback
           src={activity.imageUrl}
           name={activity.name}
@@ -83,7 +79,7 @@ export function ActivityCard({
           </Button>
         )}
       </div>
-    </SpotlightCard>
-    </TiltCard>
+    </div>
+    </HoverCard>
   );
 }

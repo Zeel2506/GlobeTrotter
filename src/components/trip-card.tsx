@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { MapPin, Wallet, MoreVertical, Pencil, Trash2, Eye } from "lucide-react";
 import { ImageFallback } from "@/components/image-fallback";
-import { TiltCard } from "@/components/motion/tilt-card";
-import { GlareOverlay } from "@/components/motion/glare-hover";
+import { HoverCard } from "@/components/motion/hover-card";
 import { StatusBadge, CountdownPill } from "@/components/status-badge";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -36,11 +35,10 @@ export function TripCard({
   const cover = trip.coverPhotoUrl ?? trip.firstCityImage;
 
   return (
-    <TiltCard className={cn("h-full", className)} amplitude={5}>
-    <div className="hover-lift group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface shadow-[var(--shadow)]">
+    <HoverCard className={cn("h-full", className)}>
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface">
       <Link href={`/trips/${trip.id}`} className="block">
         <div className="relative overflow-hidden">
-          <GlareOverlay />
           <ImageFallback
             src={cover}
             name={trip.firstCityName ?? trip.name}
@@ -117,6 +115,6 @@ export function TripCard({
         </div>
       </div>
     </div>
-    </TiltCard>
+    </HoverCard>
   );
 }

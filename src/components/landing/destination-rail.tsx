@@ -5,8 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowRight, MapPin } from "lucide-react";
 import { ImageFallback } from "@/components/image-fallback";
-import { GlareOverlay } from "@/components/motion/glare-hover";
-import { TiltCard } from "@/components/motion/tilt-card";
+import { HoverCard } from "@/components/motion/hover-card";
 import { reveal, riseIn } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 import type { CityRow } from "@/lib/api";
@@ -114,12 +113,11 @@ export function DestinationRail({
         className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {cities.map((city, i) => (
-          <TiltCard key={city.id} className="w-[210px] shrink-0 snap-start sm:w-[240px]">
+          <HoverCard key={city.id} className="w-[210px] shrink-0 snap-start sm:w-[240px]">
           <Link
             href={`/cities?q=${encodeURIComponent(city.name)}`}
-            className="group relative block aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow)]"
+            className="group relative block aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)]"
           >
-            <GlareOverlay />
             <ImageFallback
               src={city.imageUrl}
               name={city.name}
@@ -149,7 +147,7 @@ export function DestinationRail({
               </p>
             </div>
           </Link>
-          </TiltCard>
+          </HoverCard>
         ))}
       </div>
       </div>

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/empty-state";
 import { ImageFallback } from "@/components/image-fallback";
-import { SpotlightCard } from "@/components/motion/spotlight-card";
+import { HoverCard } from "@/components/motion/hover-card";
 import { api, ApiClientError, type CityRow } from "@/lib/api";
 import { EASE } from "@/lib/motion";
 
@@ -83,7 +83,7 @@ export function SavedDestinations({ initial }: { initial: CityRow[] }) {
                 exit={{ opacity: 0, scale: 0.94 }}
                 transition={{ duration: 0.24, ease: EASE }}
               >
-                <SpotlightCard className="group h-full">
+                <HoverCard className="h-full"><div className="group h-full overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface">
                   <div className="relative h-24 overflow-hidden">
                     <ImageFallback
                       src={city.imageUrl}
@@ -115,7 +115,7 @@ export function SavedDestinations({ initial }: { initial: CityRow[] }) {
                       {city._count ? ` · ${city._count.activities} things to do` : ""}
                     </p>
                   </div>
-                </SpotlightCard>
+                </div></HoverCard>
               </motion.div>
             ))}
           </AnimatePresence>

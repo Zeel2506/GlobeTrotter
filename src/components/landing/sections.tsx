@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ItineraryPreview } from "./itinerary-preview";
 
 import { CountUp } from "@/components/motion/count-up";
-import { SpotlightCard } from "@/components/motion/spotlight-card";
+import { HoverCard } from "@/components/motion/hover-card";
 import {
   HERO,
 
@@ -104,16 +104,15 @@ export function FeatureBento() {
             >
               {/* Inside a white panel the cards need their own tone, or the
                   whole grid flattens into one sheet. */}
-              <SpotlightCard
-                chrome={false}
-                className="hover-lift group h-full rounded-[var(--radius-lg)] border border-border bg-surface-muted p-7"
-              >
+              <HoverCard className="h-full" spotlight={false}>
+              <div className="group h-full rounded-[var(--radius-lg)] border border-border bg-surface-muted p-7">
                 <span className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius)] bg-primary-soft text-primary transition-transform duration-[var(--dur)] group-hover:scale-110">
                   <Icon className="size-5" />
                 </span>
                 <h3 className="text-xl font-semibold">{f.title}</h3>
                 <p className="mt-2 text-foreground-muted">{f.body}</p>
-              </SpotlightCard>
+              </div>
+              </HoverCard>
             </motion.div>
           );
         })}
