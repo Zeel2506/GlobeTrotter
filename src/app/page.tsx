@@ -45,7 +45,7 @@ export default async function LandingPage() {
           }))}
         />
 
-        <div className="page-shell pb-6 pt-12">
+        <div className="page-shell pb-16 pt-10 lg:pb-24">
           <div className="mx-auto max-w-5xl">
             <HeroSearch />
           </div>

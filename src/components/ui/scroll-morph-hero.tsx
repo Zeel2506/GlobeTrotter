@@ -306,7 +306,10 @@ export default function ScrollMorphHero({
 
               const baseRadius = Math.min(containerSize.width, containerSize.height * 1.5);
               const arcRadius = baseRadius * (isMobile ? 1.4 : 1.1);
-              const arcApexY = containerSize.height * (isMobile ? 0.35 : 0.25);
+              // Cards are positioned relative to the container's CENTRE, so a
+              // positive apex pushes the whole arc DOWN and leaves a dead band
+              // under the navbar. Negative lifts it into the upper half.
+              const arcApexY = containerSize.height * (isMobile ? -0.04 : -0.12);
               const arcCenterY = arcApexY + arcRadius;
 
               const spreadAngle = isMobile ? 100 : 130;

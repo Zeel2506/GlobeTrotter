@@ -50,7 +50,7 @@ export function DestinationRail({
   if (cities.length === 0) return null;
 
   return (
-    <section className="page-shell pb-6">
+    <section className="page-shell pb-16 lg:pb-24">
       <motion.div
         {...reveal}
         variants={riseIn}

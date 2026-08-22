@@ -24,7 +24,7 @@ export function MorphHero({ cards }: { cards: MorphCard[] }) {
         className="hero-aura pointer-events-none absolute inset-x-0 top-0 -z-10 h-[760px]"
       />
 
-      <div className="h-[clamp(520px,72vh,760px)] w-full">
+      <div className="h-[clamp(440px,58vh,620px)] w-full">
         <ScrollMorphHero
           cards={cards}
           title={HERO.title}
@@ -34,11 +34,13 @@ export function MorphHero({ cards }: { cards: MorphCard[] }) {
         />
       </div>
 
+      {/* No negative margin: the arc dips into the lower half of its canvas, so
+          pulling this block up put the copy on top of the cards. */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
-        className="page-shell -mt-4 flex flex-col items-center gap-8 pb-4 text-center"
+        className="page-shell flex flex-col items-center gap-8 pb-4 text-center"
       >
         <p className="max-w-2xl text-[17px] leading-[1.75] text-foreground-muted">
           {HERO.subtitle}
