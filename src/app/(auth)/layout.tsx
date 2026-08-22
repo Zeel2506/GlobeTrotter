@@ -42,9 +42,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
       {/* Brand side */}
       <aside className="relative hidden overflow-hidden border-l border-border bg-surface-muted lg:flex lg:flex-col lg:p-10">
-        <div aria-hidden className="absolute inset-0">
+        <div aria-hidden className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_78%)]">
           <FloatingPaths position={1} />
-          <FloatingPaths position={-1} />
         </div>
         <div
           aria-hidden

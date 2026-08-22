@@ -1,23 +1,28 @@
 // Path backdrop for the auth shell, after 21st.dev — sshahaider/auth-page.
 //
-// Now fully static. The original animated every stroke's pathLength, opacity and
-// pathOffset on an infinite linear loop; behind a login form that is 36 paths
-// compositing forever for decoration nobody is looking at. Drawing them once
-// gives the same picture at no running cost.
+// Static, and much quieter than the original.
 //
-// Also adapted: strokes take currentColor (our brand red) instead of slate-950,
-// and the count is halved from the original 36 per layer.
+// Upstream ramps stroke opacity as `0.1 + i * 0.03` across 36 strokes, which
+// tops out near 1.0 — on a light panel that reads as a tangle of bright red
+// wires running straight through the headline. Here the ramp is clamped to
+// 0.04–0.13, the stroke count is down to 9, and the spacing is widened so the
+// curves stay separated instead of bunching. It should register as texture you
+// notice only if you look for it.
 //
-// No framer-motion, no client hooks — this is a plain server component.
+// No framer-motion, no hooks: a plain server component that ships no JS.
 
 export function FloatingPaths({ position }: { position: number }) {
-  const paths = Array.from({ length: 18 }, (_, i) => {
-    const n = i * 2; // keep the original spacing with half the strokes
+  const COUNT = 9;
+
+  const paths = Array.from({ length: COUNT }, (_, i) => {
+    // Wide stride keeps the curves apart; the original's tight step is what
+    // made them bunch into a bundle at the top-left.
+    const n = i * 5;
     return {
       id: i,
       d: `M-${380 - n * 5 * position} -${189 + n * 6}C-${380 - n * 5 * position} -${189 + n * 6} -${312 - n * 5 * position} ${216 - n * 6} ${152 - n * 5 * position} ${343 - n * 6}C${616 - n * 5 * position} ${470 - n * 6} ${684 - n * 5 * position} ${875 - n * 6} ${684 - n * 5 * position} ${875 - n * 6}`,
-      width: 0.5 + n * 0.03,
-      opacity: 0.1 + n * 0.02,
+      width: 0.4 + i * 0.05,
+      opacity: Number((0.04 + i * 0.01).toFixed(3)),
     };
   });
 
