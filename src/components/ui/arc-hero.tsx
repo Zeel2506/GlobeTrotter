@@ -94,13 +94,17 @@ export default function ArcHero({ cards }: { cards: ArcCard[] }) {
   // viewport — that is why the arc looked right at 75% browser zoom (taller in
   // CSS pixels) and cramped at 100%. Tying it to width keeps the same shape at
   // any zoom level.
-  const arcRadius = Math.min(width * 0.72, height * 2.4);
-  const cardScale = isMobile ? 1.35 : 2;
-  const spreadAngle = isMobile ? 104 : 132;
+  const arcRadius = Math.min(width * 0.6, height * 2.4);
+  const cardScale = isMobile ? 1.15 : 1.55;
+  const spreadAngle = isMobile ? 96 : 120;
 
   // Cards are positioned from the container's CENTRE, so a negative apex lifts
   // the arc into the upper half and leaves the hollow for the headline.
-  const apexY = -height * (isMobile ? 0.16 : 0.3);
+  //
+  // The apex is deliberately short of the container top: at -0.30 the crown of
+  // the arc came within ~20px of the floating navbar and read as one mass with
+  // it. This keeps roughly 70px of air under the nav.
+  const apexY = -height * (isMobile ? 0.12 : 0.24);
   const arcCentreY = apexY + arcRadius;
   const step = spreadAngle / Math.max(1, total - 1);
   const startAngle = -90 - spreadAngle / 2;

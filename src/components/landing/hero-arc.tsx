@@ -32,7 +32,7 @@ export function HeroArc({ cards }: { cards: ArcCard[] }) {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
-        className="page-shell relative z-10 -mt-[20vh] flex flex-col items-center gap-7 pb-4 text-center sm:-mt-[22vh]"
+        className="page-shell relative z-10 -mt-[15vh] flex flex-col items-center gap-7 pb-4 text-center sm:-mt-[17vh]"
       >
         <h1 className="display-1 max-w-4xl">
           Plan multi-city trips,{" "}
