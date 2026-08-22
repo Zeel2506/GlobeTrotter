@@ -10,7 +10,7 @@
 //   friend@demo.com  USER, owns a public trip for the Copy Trip demo
 import { PrismaClient, type ActivityCategory, type ExpenseCategory } from "@prisma/client";
 import { hash } from "bcryptjs";
-import { CATALOG } from "./catalog";
+import { CATALOG, CITY_PHOTO, CATEGORY_PHOTO } from "./catalog";
 
 const prisma = new PrismaClient();
 
@@ -56,6 +56,7 @@ async function seedCatalog() {
         costIndex: c.costIndex,
         popularity: c.popularity,
         description: c.description,
+        imageUrl: CITY_PHOTO[c.name] ?? null,
       },
       create: {
         name: c.name,
@@ -64,6 +65,7 @@ async function seedCatalog() {
         costIndex: c.costIndex,
         popularity: c.popularity,
         description: c.description,
+        imageUrl: CITY_PHOTO[c.name] ?? null,
       },
     });
 
@@ -78,6 +80,7 @@ async function seedCatalog() {
         cost,
         durationHours,
         description,
+        imageUrl: CATEGORY_PHOTO[category] ?? null,
       })),
     });
   }

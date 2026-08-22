@@ -655,3 +655,62 @@ export const CATALOG: CitySeed[] = [
     ],
   },
 ];
+
+// ─── Photography ────────────────────────────────────────────────────────────
+// Unsplash delivery URLs. Every id below was requested and confirmed to return
+// 200 before being committed; ImageFallback still catches any that later
+// disappear, so a dead id degrades to the gradient rather than a broken image.
+
+const photo = (id: string) =>
+  `https://images.unsplash.com/${id}?w=1200&q=80&auto=format&fit=crop`;
+
+/** City name -> hero photo. Applied by prisma/seed.ts. */
+export const CITY_PHOTO: Record<string, string> = {
+  Paris: photo("photo-1502602898657-3e91760cbb34"),
+  Rome: photo("photo-1552832230-c0197dd311b5"),
+  Barcelona: photo("photo-1583422409516-2895a77efded"),
+  Amsterdam: photo("photo-1534351590666-13e3e96b5017"),
+  Prague: photo("photo-1541849546-216549ae216d"),
+  Lisbon: photo("photo-1585208798174-6cedd86e019a"),
+  Santorini: photo("photo-1570077188670-e3a8d69ac5ff"),
+  Reykjavik: photo("photo-1504829857797-ddff29c27927"),
+  Tokyo: photo("photo-1540959733332-eab4deabeeaf"),
+  Kyoto: photo("photo-1493976040374-85c8e12f0c0e"),
+  Bangkok: photo("photo-1508009603885-50cf7c579365"),
+  Ubud: photo("photo-1537996194471-e657df975ab4"),
+  Singapore: photo("photo-1525625293386-3f8f99389edd"),
+  Seoul: photo("photo-1538485399081-7191377e8241"),
+  Hanoi: photo("photo-1583417319070-4a69db38a482"),
+  Jaipur: photo("photo-1477587458883-47145ed94245"),
+  Dubai: photo("photo-1512453979798-5ea266f8880c"),
+  Istanbul: photo("photo-1524231757912-21f4fe3a7200"),
+  Marrakech: photo("photo-1597212618440-806262de4f6b"),
+  "Cape Town": photo("photo-1580060839134-75a5edca2e99"),
+  Cairo: photo("photo-1572252009286-268acec5ca0a"),
+  "Zanzibar City": photo("photo-1516026672322-bc52d61a55d5"),
+  "New York City": photo("photo-1496442226666-8d4d0e62e6e9"),
+  "San Francisco": photo("photo-1501594907352-04cda38ebc29"),
+  "Mexico City": photo("photo-1518105779142-d975f22f1b0a"),
+  Vancouver: photo("photo-1560814304-4f05b62af116"),
+  "Rio de Janeiro": photo("photo-1483729558449-99ef09a8c325"),
+  "Buenos Aires": photo("photo-1589909202802-8f4aadce1849"),
+  Cusco: photo("photo-1526392060635-9d6019884377"),
+  Sydney: photo("photo-1506973035872-a4ec16b8e8d9"),
+  Queenstown: photo("photo-1589802829985-817e51171b92"),
+};
+
+/**
+ * One representative photo per activity category. 310 individually-chosen
+ * images could not each be verified, so a category image is the honest choice:
+ * always on-topic, never confidently wrong about a specific tour.
+ */
+export const CATEGORY_PHOTO: Record<string, string> = {
+  SIGHTSEEING: photo("photo-1476514525535-07fb3b4ae5f1"),
+  FOOD: photo("photo-1504674900247-0877df9cc836"),
+  ADVENTURE: photo("photo-1533692328991-08159ff19fca"),
+  CULTURE: photo("photo-1513151233558-d860c5398176"),
+  NIGHTLIFE: photo("photo-1470229722913-7c0e2dbbafd3"),
+  SHOPPING: photo("photo-1441986300917-64674bd600d8"),
+  NATURE: photo("photo-1441974231531-c6227db76b6e"),
+  OTHER: photo("photo-1488646953014-85cb44e25828"),
+};

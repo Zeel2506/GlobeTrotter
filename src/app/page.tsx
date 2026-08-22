@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import { MarketingNav } from "@/components/landing/marketing-nav";
 import {
-  Hero,
   PreviewBand,
   StatsStrip,
   FeatureBento,
@@ -10,6 +9,8 @@ import {
   Footer,
 } from "@/components/landing/sections";
 import { DestinationRail } from "@/components/landing/destination-rail";
+import { MorphHero } from "@/components/landing/morph-hero";
+import { HeroSearch } from "@/components/landing/hero-search";
 import { prisma } from "@/lib/prisma";
 
 // Public landing — S-landing in docs/API_CONTRACT.md. Reads the session only to
@@ -22,7 +23,7 @@ export default async function LandingPage() {
     // destination the product does not actually contain.
     prisma.city.findMany({
       orderBy: [{ popularity: "desc" }, { name: "asc" }],
-      take: 10,
+      take: 16,
       include: { _count: { select: { activities: true } } },
     }),
     prisma.city.findMany({
@@ -37,7 +38,19 @@ export default async function LandingPage() {
     <>
       <MarketingNav signedIn={Boolean(session?.user)} />
       <main className="flex-1">
-        <Hero />
+        <MorphHero
+          cards={topCities.map((c) => ({
+            src: c.imageUrl ?? "",
+            label: c.name,
+          }))}
+        />
+
+        <div className="page-shell pb-6 pt-12">
+          <div className="mx-auto max-w-5xl">
+            <HeroSearch />
+          </div>
+        </div>
+
         <StatsStrip />
         <DestinationRail
           title="Handpicked destinations"
