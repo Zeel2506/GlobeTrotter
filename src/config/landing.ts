@@ -18,11 +18,12 @@ export const HERO = {
 };
 
 // Sourced from prisma/catalog.ts — 31 cities across 7 regions, 10 activities each.
+// Numeric so the strip can count up on scroll; suffix carries any unit.
 export const STATS = [
-  { value: "31", label: "Cities in the catalog" },
-  { value: "310", label: "Curated activities" },
-  { value: "7", label: "Regions covered" },
-  { value: "1 link", label: "To share the whole plan" },
+  { value: 31, suffix: "", label: "Cities in the catalog" },
+  { value: 310, suffix: "", label: "Curated activities" },
+  { value: 7, suffix: "", label: "Regions covered" },
+  { value: 1, suffix: " link", label: "To share the whole plan" },
 ];
 
 export type Feature = {
@@ -116,3 +117,9 @@ export const PREVIEW_DAYS = [
     ],
   },
 ];
+
+/** Chips under the hero search. Every term matches real rows in prisma/catalog.ts. */
+export const POPULAR_SEARCHES = ["Paris", "Tokyo", "Japan", "Europe", "Asia", "Barcelona"];
+
+/** Rotated through the hero headline. Kept short so the line never wraps mid-swap. */
+export const HERO_DESTINATIONS = ["Paris", "Tokyo", "Rome", "Ubud", "Lisbon", "Cape Town"];

@@ -5,8 +5,13 @@ import { motion } from "framer-motion";
 import { ArrowRight, Globe2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ItineraryPreview } from "./itinerary-preview";
+import { HeroSearch } from "./hero-search";
+import { RotatingText } from "@/components/motion/rotating-text";
+import { CountUp } from "@/components/motion/count-up";
+import { SpotlightCard } from "@/components/motion/spotlight-card";
 import {
   HERO,
+  HERO_DESTINATIONS,
   STATS,
   FEATURES,
   STEPS,
@@ -25,21 +30,41 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_80%_at_15%_-10%,#ffedd5_0%,transparent_55%),radial-gradient(90%_70%_at_95%_0%,#ccfbf1_0%,transparent_60%)]"
       />
 
-      <div className="page-shell grid items-center gap-12 py-16 lg:grid-cols-[1.05fr_.95fr] lg:py-24">
+      <div className="page-shell grid items-center gap-12 py-14 lg:grid-cols-[1.05fr_.95fr] lg:py-20">
         <motion.div variants={stagger(0.08)} initial="hidden" animate="show">
           <motion.p variants={riseIn} className="overline mb-4 text-primary">
             {HERO.eyebrow}
           </motion.p>
+
+          {/* The destination rotates through real catalog cities, so the headline
+              advertises the thing the product actually contains. */}
           <motion.h1 variants={riseIn} className="display-1">
-            {HERO.title}
+            Your trip to{" "}
+            <span className="relative inline-flex text-primary">
+              <RotatingText
+                texts={HERO_DESTINATIONS}
+                rotationInterval={2600}
+                staggerFrom="first"
+                mainClassName="overflow-hidden"
+                splitLevelClassName="overflow-hidden pb-1"
+              />
+            </span>
+            <br />
+            starts here
           </motion.h1>
+
           <motion.p
             variants={riseIn}
             className="mt-5 max-w-xl text-lg leading-relaxed text-foreground-muted"
           >
             {HERO.subtitle}
           </motion.p>
-          <motion.div variants={riseIn} className="mt-8 flex flex-wrap gap-3">
+
+          <motion.div variants={riseIn} className="mt-8">
+            <HeroSearch />
+          </motion.div>
+
+          <motion.div variants={riseIn} className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg">
               <Link href={HERO.primaryCta.href}>
                 {HERO.primaryCta.label}
@@ -70,7 +95,9 @@ export function StatsStrip() {
       >
         {STATS.map((s) => (
           <motion.div key={s.label} variants={riseIn} className="px-2 py-7 text-center">
-            <div className="tnum text-2xl font-bold text-primary sm:text-3xl">{s.value}</div>
+            <div className="tnum text-2xl font-bold text-primary sm:text-3xl">
+              <CountUp to={s.value} suffix={s.suffix} duration={1.4} />
+            </div>
             <div className="mt-1 text-[13px] text-foreground-muted">{s.label}</div>
           </motion.div>
         ))}
@@ -100,16 +127,18 @@ export function FeatureBento() {
             <motion.div
               key={f.title}
               variants={riseIn}
-              className={cn(
-                "hover-lift rounded-[var(--radius-xl)] border border-border bg-surface p-7 shadow-[var(--shadow)]",
-                f.span === "wide" && "lg:col-span-2",
-              )}
+              className={cn(f.span === "wide" && "lg:col-span-2")}
             >
-              <span className="mb-5 flex size-11 items-center justify-center rounded-[14px] bg-primary-soft text-primary-hover">
-                <Icon className="size-5" />
-              </span>
-              <h3 className="text-xl font-semibold">{f.title}</h3>
-              <p className="mt-2 text-foreground-muted">{f.body}</p>
+              <SpotlightCard
+                chrome={false}
+                className="hover-lift group h-full rounded-[var(--radius-xl)] border border-border bg-surface p-7 shadow-[var(--shadow)]"
+              >
+                <span className="mb-5 flex size-11 items-center justify-center rounded-[14px] bg-primary-soft text-primary-hover transition-transform duration-[var(--dur)] group-hover:scale-110">
+                  <Icon className="size-5" />
+                </span>
+                <h3 className="text-xl font-semibold">{f.title}</h3>
+                <p className="mt-2 text-foreground-muted">{f.body}</p>
+              </SpotlightCard>
             </motion.div>
           );
         })}
