@@ -10,7 +10,7 @@
 //   · the AnimatePresence wrapper is dropped: nothing here ever unmounts through
 //     it, and it was re-running the entrance on every parent re-render
 import { useRef } from "react";
-import { motion, useInView, useReducedMotion, type UseInViewOptions, type Variants } from "framer-motion";
+import { motion, useInView, type UseInViewOptions, type Variants } from "framer-motion";
 import { EASE } from "@/lib/motion";
 
 interface BlurFadeProps {
@@ -38,17 +38,15 @@ export function BlurFade({
   blur = "6px",
 }: BlurFadeProps) {
   const ref = useRef(null);
-  const reduceMotion = useReducedMotion();
   const inViewResult = useInView(ref, { once: true, margin: inViewMargin });
   const isVisible = !inView || inViewResult;
 
+  // Constant on both server and client. MotionConfig reducedMotion="user"
+  // strips the transform for those who ask for it, so branching here would only
+  // reintroduce a hydration mismatch.
   const variants: Variants = variant ?? {
-    hidden: reduceMotion
-      ? { opacity: 0 }
-      : { y: yOffset, opacity: 0, filter: `blur(${blur})` },
-    visible: reduceMotion
-      ? { opacity: 1 }
-      : { y: 0, opacity: 1, filter: "blur(0px)" },
+    hidden: { y: yOffset, opacity: 0, filter: `blur(${blur})` },
+    visible: { y: 0, opacity: 1, filter: "blur(0px)" },
   };
 
   return (

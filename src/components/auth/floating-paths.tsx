@@ -8,10 +8,9 @@
 //   · durations are deterministic rather than Math.random(), so the server and
 //     client markup agree — random values here caused a hydration mismatch
 //   · disabled entirely under prefers-reduced-motion
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function FloatingPaths({ position }: { position: number }) {
-  const reduceMotion = useReducedMotion();
 
   const paths = Array.from({ length: 18 }, (_, i) => {
     const n = i * 2; // keep the original spacing with half the strokes
@@ -35,16 +34,8 @@ export function FloatingPaths({ position }: { position: number }) {
             strokeWidth={path.width}
             strokeOpacity={path.opacity}
             initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={
-              reduceMotion
-                ? { pathLength: 1, opacity: 0.4 }
-                : { pathLength: 1, opacity: [0.3, 0.6, 0.3], pathOffset: [0, 1, 0] }
-            }
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : { duration: path.duration, repeat: Infinity, ease: "linear" }
-            }
+            animate={{ pathLength: 1, opacity: [0.3, 0.6, 0.3], pathOffset: [0, 1, 0] }}
+            transition={{ duration: path.duration, repeat: Infinity, ease: "linear" }}
           />
         ))}
       </svg>

@@ -183,9 +183,9 @@ export const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(funct
     return () => clearInterval(id);
   }, [next, rotationInterval, auto]);
 
-  const motionProps = reduceMotion
-    ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
-    : { initial, animate, exit };
+  // Constant: MotionConfig handles the reduced-motion case without changing
+  // what the server renders.
+  const motionProps = { initial, animate, exit };
 
   return (
     <motion.span

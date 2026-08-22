@@ -14,7 +14,7 @@
 //     for coarse pointers — a tilt that tracks a finger is jitter, not polish
 //   · perspective lives on the wrapper so nested transforms stay in one 3D space
 import { useRef } from "react";
-import { motion, useMotionValue, useReducedMotion, useSpring, type SpringOptions } from "framer-motion";
+import { motion, useMotionValue, useSpring, type SpringOptions } from "framer-motion";
 import { cn } from "@/lib/cn";
 
 const spring: SpringOptions = { damping: 30, stiffness: 220, mass: 0.8 };
@@ -33,7 +33,6 @@ export function TiltCard({
   scaleOnHover?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
 
   const rotateX = useSpring(useMotionValue(0), spring);
   const rotateY = useSpring(useMotionValue(0), spring);
@@ -53,8 +52,6 @@ export function TiltCard({
     rotateY.set(0);
     scale.set(1);
   }
-
-  if (reduceMotion) return <div className={className}>{children}</div>;
 
   return (
     <div

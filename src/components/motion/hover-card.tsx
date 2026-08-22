@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useMotionValue, useReducedMotion, useSpring, type SpringOptions } from "framer-motion";
+import { motion, useMotionValue, useSpring, type SpringOptions } from "framer-motion";
 import { cn } from "@/lib/cn";
 
 /**
@@ -45,7 +45,6 @@ export function HoverCard({
   spotlight?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
   const [hovered, setHovered] = useState(false);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
 
@@ -79,8 +78,6 @@ export function HoverCard({
     y.set(0);
     s.set(1);
   }
-
-  if (reduceMotion) return <div className={className}>{children}</div>;
 
   return (
     <div ref={ref} onMouseMove={handleMove} onMouseEnter={enter} onMouseLeave={leave} className={cn("[perspective:1100px]", className)}>

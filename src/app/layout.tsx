@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
+import { MotionProvider } from "@/components/motion/motion-provider";
 import "./globals.css";
 
 /**
@@ -43,7 +44,7 @@ export default function RootLayout({
       className={`${diatype.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         <Toaster
           position="bottom-right"
           toastOptions={{
