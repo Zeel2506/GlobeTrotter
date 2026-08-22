@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { Logo } from "@/components/brand/logo";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
-import { Globe2, Plus, Menu, X, User, Heart, Shield, LogOut } from "lucide-react";
+import { Plus, Menu, X, User, Heart, Shield, LogOut } from "lucide-react";
 import { MAIN_NAV, isActivePath } from "@/config/nav";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
@@ -41,12 +42,7 @@ export function AppNav({
     // different products.
     <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
       <nav className="mx-auto flex h-16 max-w-[1240px] items-center gap-3 rounded-[var(--radius-pill)] border border-border bg-surface/95 pl-4 pr-3 shadow-[var(--shadow-float)] backdrop-blur-xl">
-        <Link href="/dashboard" className="flex shrink-0 items-center gap-2.5 font-semibold">
-          <span className="flex size-9 items-center justify-center rounded-full bg-primary text-primary-fg">
-            <Globe2 className="size-[19px]" />
-          </span>
-          <span className="hidden text-[17px] tracking-tight sm:inline">GlobeTrotter</span>
-        </Link>
+        <Logo href="/dashboard" wordmarkClassName="hidden sm:inline" />
 
         {/* Icon-led nav, the way travel apps signpost their sections. The active
             pill is one shared element that slides between items rather than four

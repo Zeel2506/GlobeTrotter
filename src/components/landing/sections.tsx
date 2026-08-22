@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { Logo } from "@/components/brand/logo";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ItineraryPreview } from "./itinerary-preview";
 
@@ -195,12 +196,7 @@ export function Footer() {
     <footer className="border-t border-border bg-surface">
       <div className="page-shell grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div className="max-w-xs">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <span className="flex size-8 items-center justify-center rounded-[10px] bg-primary text-primary-fg">
-              <Globe2 className="size-[18px]" />
-            </span>
-            <span className="text-[17px] tracking-tight">GlobeTrotter</span>
-          </Link>
+          <Logo />
           <p className="mt-3 text-[14px] leading-relaxed text-foreground-muted">
             Multi-city itineraries, a budget that keeps itself honest, and one link that
             shares the whole plan.

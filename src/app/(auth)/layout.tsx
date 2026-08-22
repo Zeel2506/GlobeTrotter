@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Globe2, ChevronLeft, Map, Wallet, Share2 } from "lucide-react";
+import { Logo } from "@/components/brand/logo";
+import { ChevronLeft, Map, Wallet, Share2 } from "lucide-react";
 import { FloatingPaths } from "@/components/auth/floating-paths";
 
 /**
@@ -33,12 +34,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         </div>
 
         <div className="mx-auto w-full max-w-sm">
-          <Link href="/" className="mb-8 flex items-center gap-2.5 font-semibold lg:hidden">
-            <span className="flex size-9 items-center justify-center rounded-full bg-primary text-primary-fg">
-              <Globe2 className="size-[19px]" />
-            </span>
-            <span className="text-[17px] tracking-tight">GlobeTrotter</span>
-          </Link>
+          <Logo className="mb-8 lg:hidden" />
 
           {children}
         </div>
@@ -59,12 +55,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           className="absolute inset-0 bg-gradient-to-t from-surface-muted via-transparent to-transparent"
         />
 
-        <Link href="/" className="relative z-10 flex items-center gap-2.5 font-semibold">
-          <span className="flex size-9 items-center justify-center rounded-full bg-primary text-primary-fg">
-            <Globe2 className="size-[19px]" />
-          </span>
-          <span className="text-[17px] tracking-tight">GlobeTrotter</span>
-        </Link>
+        <Logo className="relative z-10" />
 
         <div className="relative z-10 mt-auto">
           <h2 className="statement max-w-md text-[2rem] leading-tight">

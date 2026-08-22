@@ -54,5 +54,10 @@ export default auth((req) => {
 
 export const config = {
   // API routes are excluded — they enforce auth themselves via requireRole().
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
+  //
+  // `icon` and `apple-icon` are listed explicitly: Next's generated metadata
+  // icons are served from extensionless routes, so the `.*\..*` escape hatch
+  // does not cover them and the favicon was being redirected to /login for
+  // logged-out visitors.
+  matcher: ["/((?!api|_next/static|_next/image|icon|apple-icon|favicon.ico|.*\\..*).*)"],
 };

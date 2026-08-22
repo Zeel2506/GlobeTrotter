@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { Logo } from "@/components/brand/logo";
 import { useEffect, useState } from "react";
-import { Globe2, Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { MARKETING_NAV } from "@/config/nav";
 import { cn } from "@/lib/cn";
 
@@ -30,12 +31,7 @@ export function MarketingNav({ signedIn }: { signedIn: boolean }) {
           scrolled ? "shadow-[var(--shadow-float)]" : "shadow-[var(--shadow-sm)]",
         )}
       >
-        <Link href="/" className="flex shrink-0 items-center gap-2.5 font-semibold">
-          <span className="flex size-9 items-center justify-center rounded-full bg-primary text-primary-fg">
-            <Globe2 className="size-[19px]" />
-          </span>
-          <span className="text-[17px] tracking-tight">GlobeTrotter</span>
-        </Link>
+        <Logo />
 
         {/* Centred link cluster, the way EcoSphere balances its capsule. */}
         <div className="hidden flex-1 items-center justify-center gap-1 md:flex">

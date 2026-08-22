@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { Logo } from "@/components/brand/logo";
 import { redirect } from "next/navigation";
-import { ArrowLeft, Globe2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { auth } from "@/auth";
 import { AdminSidebar } from "./sidebar";
 import { PageTransition } from "@/components/motion/page-transition";
@@ -23,15 +24,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <div className="flex min-h-screen bg-surface-muted">
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-border bg-surface lg:flex">
-        <Link
+        <Logo
           href="/admin"
-          className="flex h-14 shrink-0 items-center gap-2 border-b border-border px-4 font-semibold"
-        >
-          <span className="flex size-7 items-center justify-center rounded-lg bg-foreground text-background">
-            <Globe2 className="size-4" />
-          </span>
-          <span className="text-[15px] tracking-tight">Admin console</span>
-        </Link>
+          className="h-14 border-b border-border px-4"
+          markClassName="h-6"
+          wordmarkClassName="text-[15px]"
+        />
 
         <AdminSidebar />
 
