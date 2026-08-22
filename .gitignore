@@ -41,6 +41,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# curl cookie jars from API testing — these hold live session JWTs
-*.txt
+# curl cookie jars from API testing — these hold live session JWTs.
+# Scoped to the repo root and to cookie-jar names only: a blanket *.txt would
+# also ignore public/robots.txt and similar files a Next app legitimately ships.
 cookies*
+*.cookiejar
+/a.txt
+/c.txt
+/f.txt
