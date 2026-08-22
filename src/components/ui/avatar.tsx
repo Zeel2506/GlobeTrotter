@@ -18,14 +18,14 @@ export function Avatar({
   return (
     <Primitive.Root
       className={cn(
-        "relative flex size-9 shrink-0 select-none overflow-hidden rounded-full",
+        "relative flex size-9 shrink-0 select-none overflow-hidden rounded-full ring-2 ring-surface",
         className,
       )}
     >
       {src && <Primitive.Image src={src} alt={name} className="h-full w-full object-cover" />}
       <Primitive.Fallback
         delayMs={src ? 200 : 0}
-        className="flex h-full w-full items-center justify-center bg-primary-soft text-[12px] font-bold uppercase text-primary-hover"
+        className="flex h-full w-full items-center justify-center bg-gradient-to-br from-foreground to-[#3a3a3a] text-[12px] font-bold uppercase tracking-wide text-white"
       >
         {initials(name)}
       </Primitive.Fallback>

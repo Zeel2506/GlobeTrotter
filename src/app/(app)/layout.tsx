@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { AppNav } from "@/components/app-nav";
 import { PageTransition } from "@/components/motion/page-transition";
+import { AppFooter } from "@/components/app-footer";
 
 // Shell for every signed-in consumer screen. Middleware already gates these
 // routes; the redirect here is belt-and-braces for direct server renders.
@@ -30,9 +31,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           photoUrl: profile?.photoUrl,
         }}
       />
-      <main className="flex-1 pb-16 pt-8">
+      <main className="flex-1 pb-20 pt-8">
         <PageTransition>{children}</PageTransition>
       </main>
+      <AppFooter />
     </>
   );
 }
