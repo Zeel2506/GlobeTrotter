@@ -37,13 +37,14 @@ export function MorphHero({ cards }: { cards: MorphCard[] }) {
         />
       </div>
 
-      {/* No negative margin: the arc dips into the lower half of its canvas, so
-          pulling this block up put the copy on top of the cards. */}
+      {/* Lifted into the hollow under the arc so the headline reads as part of
+          the hero rather than as the next section. `relative` keeps it above the
+          canvas; the arc's ends still bracket it on either side. */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
-        className="page-shell flex flex-col items-center gap-7 pb-4 text-center"
+        className="page-shell relative z-10 -mt-[14vh] flex flex-col items-center gap-7 pb-4 text-center sm:-mt-[16vh]"
       >
         {/* The real, permanent <h1>. The one inside the morph canvas animates to
             opacity 0, so the page would otherwise be left with a heading that

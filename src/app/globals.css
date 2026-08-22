@@ -94,8 +94,8 @@
   --shadow-md: var(--shadow);
   --shadow-lg: var(--shadow-lg);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-diatype), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-diatype), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -110,7 +110,7 @@
   body {
     background: var(--background);
     color: var(--foreground);
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-diatype), ui-sans-serif, system-ui, sans-serif;
     font-size: 0.9375rem;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -120,7 +120,7 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
+    font-family: var(--font-diatype), ui-sans-serif, system-ui, sans-serif;
     letter-spacing: -0.025em;
     text-wrap: balance;
   }
@@ -145,7 +145,7 @@
 @layer utilities {
   /* EcoSphere's hero type: very large, very tight, balanced across lines. */
   .display-1 {
-    font-family: var(--font-jakarta), sans-serif;
+    font-family: var(--font-diatype), ui-sans-serif, sans-serif;
     font-size: clamp(2.75rem, 7vw, 5.25rem);
     line-height: 1.02;
     font-weight: 800;

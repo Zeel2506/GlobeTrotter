@@ -1,21 +1,26 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-// Pairing frozen in docs/DESIGN_SYSTEM.md §3. Jakarta carries display weight,
-// Inter carries UI and body. The starter's Geist pairing reads as developer-tool.
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+/**
+ * ABC Diatype, self-hosted from /fonts. It carries both body and display —
+ * the previous Inter + Jakarta pairing is gone, so nothing is fetched from
+ * Google Fonts any more.
+ *
+ * Diatype ships no italic cut here, so `.display-accent` deliberately keeps its
+ * serif fallback for the one italic word in the hero.
+ */
+const diatype = localFont({
+  variable: "--font-diatype",
   display: "swap",
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  display: "swap",
+  src: [
+    { path: "../../fonts/ABCDiatype-Thin.otf", weight: "100", style: "normal" },
+    { path: "../../fonts/ABCDiatype-Light.otf", weight: "300", style: "normal" },
+    { path: "../../fonts/ABCDiatype-Regular.otf", weight: "400", style: "normal" },
+    { path: "../../fonts/ABCDiatype-Medium.otf", weight: "500", style: "normal" },
+    { path: "../../fonts/ABCDiatype-Bold.otf", weight: "700", style: "normal" },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jakarta.variable} h-full antialiased`}
+      className={`${diatype.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
