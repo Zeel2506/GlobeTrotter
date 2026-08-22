@@ -170,16 +170,18 @@ async function createTrip(userId: string, seed: TripSeed) {
 // ── Demo trips ──────────────────────────────────────────────────────────────
 
 /**
- * The demo-path trip. Three cities, ten days out, fully built, with budgetTotal
- * set low enough that day 3 (the Versailles + Moulin Rouge day) trips the
- * over-budget flag the budget screen is built to show.
+ * The demo-path trip. Three cities, fully built, comfortably inside its overall
+ * budget but with the Versailles + Moulin Rouge day clearing the daily budget —
+ * that is the single pulsing bar the budget screen is built around. The Japan
+ * trip below is the one that busts its budget overall, so the two states are
+ * demonstrable side by side.
  */
 const EUROPE_TRIP: TripSeed = {
   name: "European Summer Escape",
   description: "Two weeks through Paris, Rome and Barcelona — museums, markets and a lot of walking.",
   start: 24,
   end: 36,
-  budgetTotal: 2400,
+  budgetTotal: 4400,
   stops: [
     {
       city: "Paris",
