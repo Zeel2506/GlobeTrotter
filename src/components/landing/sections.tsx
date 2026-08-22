@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Globe2, Sparkles, Play, Check } from "lucide-react";
+import { ArrowRight, Globe2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ItineraryPreview } from "./itinerary-preview";
-import { HeroSearch } from "./hero-search";
+
 import { CountUp } from "@/components/motion/count-up";
 import { SpotlightCard } from "@/components/motion/spotlight-card";
 import {
   HERO,
-  HERO_TRUST,
+
   STATS,
   FEATURES,
   STEPS,
@@ -20,90 +20,6 @@ import {
 } from "@/config/landing";
 import { riseIn, stagger, reveal } from "@/lib/motion";
 import { cn } from "@/lib/cn";
-
-export function Hero() {
-  return (
-    <section className="relative overflow-hidden">
-      {/* The soft pastel aura behind the headline. Pure CSS — nothing to load,
-          nothing to 404, and it fades out before the planner card. */}
-      <div
-        aria-hidden
-        className="hero-aura pointer-events-none absolute inset-x-0 top-0 -z-10 h-[720px]"
-      />
-
-      {/* EcoSphere rhythm: pill badge, oversized centred headline, roomy
-          subtitle, two pill CTAs, trust row — each separated by real air. The
-          MakeMyTrip planner card then sits below it. */}
-      <div className="page-shell pb-16 pt-20 text-center lg:pb-24 lg:pt-28">
-        <motion.div variants={stagger(0.09)} initial="hidden" animate="show">
-          <motion.div variants={riseIn} className="flex justify-center">
-            <span className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-border bg-surface px-4 py-2 shadow-[var(--shadow-sm)]">
-              <Sparkles className="size-3.5 text-primary" />
-              <span className="overline text-foreground-muted">{HERO.eyebrow}</span>
-            </span>
-          </motion.div>
-
-          {/* The destination rotates through real catalog cities, so the headline
-              advertises the thing the product actually contains. */}
-          <motion.h1 variants={riseIn} className="display-1 mx-auto mt-10 max-w-5xl">
-            Plan every city,
-            <br />
-            <span className="display-accent">budget</span> and day.
-          </motion.h1>
-
-          <motion.p
-            variants={riseIn}
-            className="mx-auto mt-8 max-w-2xl text-[17px] leading-[1.75] text-foreground-muted sm:text-lg"
-          >
-            {HERO.subtitle}
-          </motion.p>
-
-          <motion.div
-            variants={riseIn}
-            className="mt-10 flex flex-wrap items-center justify-center gap-3"
-          >
-            <Link
-              href={HERO.primaryCta.href}
-              className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-primary px-8 py-3.5 text-[15px] font-semibold text-primary-fg shadow-[var(--shadow)] transition-all hover:bg-primary-hover hover:shadow-[var(--shadow-hover)] active:scale-[.98]"
-            >
-              {HERO.primaryCta.label}
-              <ArrowUpRight className="size-[18px]" />
-            </Link>
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-border bg-surface px-8 py-3.5 text-[15px] font-semibold transition-all hover:bg-surface-muted active:scale-[.98]"
-            >
-              <Play className="size-4" />
-              Sign in
-            </Link>
-          </motion.div>
-
-          <motion.ul
-            variants={riseIn}
-            className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
-          >
-            {HERO_TRUST.map((point) => (
-              <li
-                key={point}
-                className="flex items-center gap-2 text-[14px] text-foreground-muted"
-              >
-                <Check className="size-4 text-primary" />
-                {point}
-              </li>
-            ))}
-          </motion.ul>
-        </motion.div>
-      </div>
-
-      {/* MakeMyTrip's planner panel, on the seam between hero and page body. */}
-      <div className="page-shell pb-20 lg:pb-28">
-        <div className="mx-auto max-w-5xl">
-          <HeroSearch />
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /** The CSS-built itinerary visual, promoted to its own band under the hero. */
 export function PreviewBand() {

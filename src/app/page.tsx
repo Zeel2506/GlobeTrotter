@@ -9,7 +9,7 @@ import {
   Footer,
 } from "@/components/landing/sections";
 import { DestinationRail } from "@/components/landing/destination-rail";
-import { MorphHero } from "@/components/landing/morph-hero";
+import { HeroArc } from "@/components/landing/hero-arc";
 import { HeroSearch } from "@/components/landing/hero-search";
 import { prisma } from "@/lib/prisma";
 
@@ -38,7 +38,7 @@ export default async function LandingPage() {
     <>
       <MarketingNav signedIn={Boolean(session?.user)} />
       <main className="flex-1">
-        <MorphHero
+        <HeroArc
           cards={topCities.map((c) => ({
             src: c.imageUrl ?? "",
             label: c.name,
