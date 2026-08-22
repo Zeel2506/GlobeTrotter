@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Heart, Plus, TrendingUp, Ticket } from "lucide-react";
 import { ImageFallback } from "@/components/image-fallback";
 import { SpotlightCard } from "@/components/motion/spotlight-card";
+import { TiltCard } from "@/components/motion/tilt-card";
 import { GlareOverlay } from "@/components/motion/glare-hover";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,11 +35,11 @@ export function CityCard({
   const band = costBand(city.costIndex);
 
   return (
+    <TiltCard className={cn("h-full", className)} amplitude={5}>
     <SpotlightCard
       chrome={false}
       className={cn(
         "hover-lift group flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface shadow-[var(--shadow)]",
-        className,
       )}
     >
       <div className="relative overflow-hidden">
@@ -132,5 +133,6 @@ export function CityCard({
         )}
       </div>
     </SpotlightCard>
+    </TiltCard>
   );
 }

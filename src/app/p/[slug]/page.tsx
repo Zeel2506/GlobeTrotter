@@ -149,7 +149,7 @@ export default async function PublicTripPage({ params }: Props) {
         </div>
       </main>
 
-      <footer className="border-t border-border bg-surface">
+      <footer className="mt-auto border-t border-border bg-surface">
         <div className="page-shell flex flex-col items-center justify-between gap-3 py-8 sm:flex-row">
           <Link href="/" className="flex items-center gap-2 text-sm font-semibold">
             <span className="flex size-6 items-center justify-center rounded-lg bg-primary text-primary-fg">

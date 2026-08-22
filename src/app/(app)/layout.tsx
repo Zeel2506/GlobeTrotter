@@ -31,7 +31,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           photoUrl: profile?.photoUrl,
         }}
       />
-      <main className="flex-1 pb-20 pt-8">
+      <main className="flex-1 pb-10 pt-8">
         <PageTransition>{children}</PageTransition>
       </main>
       <AppFooter />

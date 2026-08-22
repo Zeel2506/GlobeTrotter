@@ -193,7 +193,7 @@ export function CtaBand() {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-surface">
+    <footer className="mt-auto border-t border-border bg-surface">
       <div className="page-shell grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div className="max-w-xs">
           <Logo />

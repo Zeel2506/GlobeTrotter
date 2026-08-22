@@ -25,7 +25,7 @@ export function Avatar({
       {src && <Primitive.Image src={src} alt={name} className="h-full w-full object-cover" />}
       <Primitive.Fallback
         delayMs={src ? 200 : 0}
-        className="flex h-full w-full items-center justify-center bg-gradient-to-br from-foreground to-[#3a3a3a] text-[12px] font-bold uppercase tracking-wide text-white"
+        className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#0f3d46] to-[#1f7a86] text-[12px] font-bold uppercase tracking-wide text-white"
       >
         {initials(name)}
       </Primitive.Fallback>

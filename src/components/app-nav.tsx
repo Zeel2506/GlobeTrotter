@@ -41,15 +41,13 @@ export function AppNav({
     // Floating pill, matching the marketing shell so the two never read as two
     // different products.
     <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
-      <nav className="mx-auto flex h-16 max-w-[1240px] items-center gap-3 rounded-[var(--radius-pill)] border border-border bg-surface/95 pl-4 pr-3 shadow-[var(--shadow-float)] backdrop-blur-xl">
-        <div className="flex flex-1 justify-start">
-          <Logo href="/dashboard" wordmarkClassName="hidden sm:inline" />
-        </div>
+      <nav className="relative mx-auto flex h-16 max-w-[1240px] items-center gap-3 rounded-[var(--radius-pill)] border border-border bg-surface/95 pl-4 pr-3 shadow-[var(--shadow-float)] backdrop-blur-xl">
+        <Logo href="/dashboard" wordmarkClassName="hidden sm:inline" />
 
         {/* Icon-led nav, the way travel apps signpost their sections. The active
             pill is one shared element that slides between items rather than four
             that fade — the movement is what makes the switch feel deliberate. */}
-        <div className="hidden items-center justify-center gap-1 md:flex">
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex">
           {MAIN_NAV.map((item) => {
             const Icon = item.icon;
             const active = isActivePath(pathname, item.href);
@@ -79,7 +77,7 @@ export function AppNav({
           })}
         </div>
 
-        <div className="flex flex-1 items-center justify-end gap-2">
+        <div className="ml-auto flex items-center gap-2">
           <Button asChild size="sm" className="hidden sm:inline-flex">
             <Link href="/trips/new">
               <Plus />
