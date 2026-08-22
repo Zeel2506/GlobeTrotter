@@ -50,7 +50,7 @@ export function DestinationRail({
   if (cities.length === 0) return null;
 
   return (
-    <section className="page-shell py-16 lg:py-20">
+    <section className="page-shell pb-6">
       <motion.div
         {...reveal}
         variants={riseIn}

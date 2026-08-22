@@ -150,3 +150,6 @@ export const FOOTER_COLUMNS: { heading: string; links: { label: string; href: st
     ],
   },
 ];
+
+/** The check-marked reassurance row under the hero CTAs (EcoSphere pattern). */
+export const HERO_TRUST = ["Free to start, no card", "31 cities, 310 activities", "Share with one link"];

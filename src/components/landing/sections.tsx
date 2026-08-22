@@ -2,16 +2,15 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Globe2, Sparkles, Play, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ItineraryPreview } from "./itinerary-preview";
 import { HeroSearch } from "./hero-search";
-import { RotatingText } from "@/components/motion/rotating-text";
 import { CountUp } from "@/components/motion/count-up";
 import { SpotlightCard } from "@/components/motion/spotlight-card";
 import {
   HERO,
-  HERO_DESTINATIONS,
+  HERO_TRUST,
   STATS,
   FEATURES,
   STEPS,
@@ -25,48 +24,79 @@ import { cn } from "@/lib/cn";
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
-      {/* Sand → teal wash. Pure CSS, so nothing to load and nothing to break. */}
+      {/* The soft pastel aura behind the headline. Pure CSS — nothing to load,
+          nothing to 404, and it fades out before the planner card. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_80%_at_15%_-10%,#ffedd5_0%,transparent_55%),radial-gradient(90%_70%_at_95%_0%,#ccfbf1_0%,transparent_60%)]"
+        className="hero-aura pointer-events-none absolute inset-x-0 top-0 -z-10 h-[720px]"
       />
 
-      {/* Centred headline over a full-bleed wash, with the planner card straddling
-          the section below it — the arrangement every large travel portal uses,
-          because the search box is the product's front door. */}
-      <div className="page-shell pb-4 pt-14 text-center lg:pt-20">
-        <motion.div variants={stagger(0.08)} initial="hidden" animate="show">
-          <motion.p variants={riseIn} className="overline mb-4 text-primary">
-            {HERO.eyebrow}
-          </motion.p>
+      {/* EcoSphere rhythm: pill badge, oversized centred headline, roomy
+          subtitle, two pill CTAs, trust row — each separated by real air. The
+          MakeMyTrip planner card then sits below it. */}
+      <div className="page-shell pb-16 pt-20 text-center lg:pb-24 lg:pt-28">
+        <motion.div variants={stagger(0.09)} initial="hidden" animate="show">
+          <motion.div variants={riseIn} className="flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-border bg-surface px-4 py-2 shadow-[var(--shadow-sm)]">
+              <Sparkles className="size-3.5 text-primary" />
+              <span className="overline text-foreground-muted">{HERO.eyebrow}</span>
+            </span>
+          </motion.div>
 
           {/* The destination rotates through real catalog cities, so the headline
               advertises the thing the product actually contains. */}
-          <motion.h1 variants={riseIn} className="display-1">
-            Your trip to{" "}
-            <span className="relative inline-flex text-primary">
-              <RotatingText
-                texts={HERO_DESTINATIONS}
-                rotationInterval={2600}
-                staggerFrom="first"
-                mainClassName="overflow-hidden"
-                splitLevelClassName="overflow-hidden pb-1"
-              />
-            </span>
+          <motion.h1 variants={riseIn} className="display-1 mx-auto mt-10 max-w-5xl">
+            Plan every city,
             <br />
-            starts here
+            <span className="display-accent">budget</span> and day.
           </motion.h1>
 
           <motion.p
             variants={riseIn}
-            className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-foreground-muted"
+            className="mx-auto mt-8 max-w-2xl text-[17px] leading-[1.75] text-foreground-muted sm:text-lg"
           >
             {HERO.subtitle}
           </motion.p>
+
+          <motion.div
+            variants={riseIn}
+            className="mt-10 flex flex-wrap items-center justify-center gap-3"
+          >
+            <Link
+              href={HERO.primaryCta.href}
+              className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-primary px-8 py-3.5 text-[15px] font-semibold text-primary-fg shadow-[var(--shadow)] transition-all hover:bg-primary-hover hover:shadow-[var(--shadow-hover)] active:scale-[.98]"
+            >
+              {HERO.primaryCta.label}
+              <ArrowUpRight className="size-[18px]" />
+            </Link>
+            <Link
+              href="/login"
+              className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-border bg-surface px-8 py-3.5 text-[15px] font-semibold transition-all hover:bg-surface-muted active:scale-[.98]"
+            >
+              <Play className="size-4" />
+              Sign in
+            </Link>
+          </motion.div>
+
+          <motion.ul
+            variants={riseIn}
+            className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
+          >
+            {HERO_TRUST.map((point) => (
+              <li
+                key={point}
+                className="flex items-center gap-2 text-[14px] text-foreground-muted"
+              >
+                <Check className="size-4 text-primary" />
+                {point}
+              </li>
+            ))}
+          </motion.ul>
         </motion.div>
       </div>
 
-      <div className="page-shell pb-16">
+      {/* MakeMyTrip's planner panel, on the seam between hero and page body. */}
+      <div className="page-shell pb-20 lg:pb-28">
         <div className="mx-auto max-w-5xl">
           <HeroSearch />
         </div>
@@ -78,8 +108,8 @@ export function Hero() {
 /** The CSS-built itinerary visual, promoted to its own band under the hero. */
 export function PreviewBand() {
   return (
-    <section className="border-t border-border bg-surface-muted/40">
-      <div className="page-shell grid items-center gap-10 py-16 lg:grid-cols-[.95fr_1.05fr] lg:py-20">
+    <section className="page-shell pb-6">
+      <div className="panel grid items-center gap-10 px-6 py-14 sm:px-10 lg:grid-cols-[.95fr_1.05fr] lg:px-14 lg:py-20">
         <motion.div {...reveal} variants={riseIn}>
           <p className="overline mb-3 text-primary">The itinerary builder</p>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -110,18 +140,20 @@ export function PreviewBand() {
 
 export function StatsStrip() {
   return (
-    <section className="border-y border-border bg-surface/60">
+    <section className="page-shell pb-6">
+      {/* A white panel floating on the grey canvas — the unit MakeMyTrip stacks
+          its whole page out of. */}
       <motion.div
         {...reveal}
         variants={stagger(0.05)}
-        className="page-shell grid grid-cols-2 divide-border sm:grid-cols-4 sm:divide-x"
+        className="panel grid grid-cols-2 divide-border sm:grid-cols-4 sm:divide-x"
       >
         {STATS.map((s) => (
-          <motion.div key={s.label} variants={riseIn} className="px-2 py-7 text-center">
-            <div className="tnum text-2xl font-bold text-primary sm:text-3xl">
+          <motion.div key={s.label} variants={riseIn} className="px-4 py-10 text-center">
+            <div className="tnum text-3xl font-bold text-primary sm:text-4xl">
               <CountUp to={s.value} suffix={s.suffix} duration={1.4} />
             </div>
-            <div className="mt-1 text-[13px] text-foreground-muted">{s.label}</div>
+            <div className="mt-2 text-[13px] text-foreground-muted">{s.label}</div>
           </motion.div>
         ))}
       </motion.div>
@@ -131,7 +163,8 @@ export function StatsStrip() {
 
 export function FeatureBento() {
   return (
-    <section id="features" className="page-shell py-20 lg:py-28">
+    <section id="features" className="page-shell pb-6">
+      <div className="panel px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
       <motion.div {...reveal} variants={riseIn} className="mb-12 max-w-2xl">
         <p className="overline mb-3 text-primary">Everything in one place</p>
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -152,11 +185,13 @@ export function FeatureBento() {
               variants={riseIn}
               className={cn(f.span === "wide" && "lg:col-span-2")}
             >
+              {/* Inside a white panel the cards need their own tone, or the
+                  whole grid flattens into one sheet. */}
               <SpotlightCard
                 chrome={false}
-                className="hover-lift group h-full rounded-[var(--radius-xl)] border border-border bg-surface p-7 shadow-[var(--shadow)]"
+                className="hover-lift group h-full rounded-[var(--radius-lg)] border border-border bg-surface-muted p-7"
               >
-                <span className="mb-5 flex size-11 items-center justify-center rounded-[14px] bg-primary-soft text-primary-hover transition-transform duration-[var(--dur)] group-hover:scale-110">
+                <span className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius)] bg-primary-soft text-primary transition-transform duration-[var(--dur)] group-hover:scale-110">
                   <Icon className="size-5" />
                 </span>
                 <h3 className="text-xl font-semibold">{f.title}</h3>
@@ -166,14 +201,15 @@ export function FeatureBento() {
           );
         })}
       </motion.div>
+      </div>
     </section>
   );
 }
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="border-y border-border bg-surface-muted/50">
-      <div className="page-shell py-20 lg:py-28">
+    <section id="how-it-works" className="page-shell pb-6">
+      <div className="panel px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
         <motion.div {...reveal} variants={riseIn} className="mb-14 max-w-2xl">
           <p className="overline mb-3 text-primary">How it works</p>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -208,15 +244,16 @@ export function HowItWorks() {
 
 export function CtaBand() {
   return (
-    <section className="page-shell py-20 lg:py-24">
+    <section className="page-shell pb-6 pt-6">
       <motion.div
         {...reveal}
         variants={riseIn}
-        className="relative overflow-hidden rounded-[var(--radius-xl)] bg-primary px-8 py-16 text-center text-primary-fg"
+        className="relative overflow-hidden rounded-[var(--radius-xl)] bg-primary px-8 py-20 text-center text-primary-fg lg:py-24"
       >
+        {/* Coral wash over the blue — the MakeMyTrip accent pairing. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_120%_at_80%_0%,rgba(249,115,22,.35),transparent_60%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_120%_at_80%_0%,rgba(255,102,75,.4),transparent_60%)]"
         />
         <div className="relative">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{CTA_BAND.title}</h2>

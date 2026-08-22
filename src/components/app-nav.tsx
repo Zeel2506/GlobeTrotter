@@ -37,11 +37,13 @@ export function AppNav({
   const isAdmin = user.role === "ADMIN";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
-      <nav className="page-shell flex h-16 items-center gap-3">
-        <Link href="/dashboard" className="flex shrink-0 items-center gap-2 font-semibold">
-          <span className="flex size-8 items-center justify-center rounded-[10px] bg-primary text-primary-fg">
-            <Globe2 className="size-[18px]" />
+    // Floating pill, matching the marketing shell so the two never read as two
+    // different products.
+    <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6 sm:pt-4">
+      <nav className="mx-auto flex h-16 max-w-[1240px] items-center gap-3 rounded-[var(--radius-pill)] border border-border bg-surface/95 pl-4 pr-3 shadow-[var(--shadow-float)] backdrop-blur-xl">
+        <Link href="/dashboard" className="flex shrink-0 items-center gap-2.5 font-semibold">
+          <span className="flex size-9 items-center justify-center rounded-full bg-primary text-primary-fg">
+            <Globe2 className="size-[19px]" />
           </span>
           <span className="hidden text-[17px] tracking-tight sm:inline">GlobeTrotter</span>
         </Link>
@@ -59,7 +61,7 @@ export function AppNav({
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative flex items-center gap-2 rounded-[var(--radius)] px-3 py-2 text-sm font-medium transition-colors",
+                  "relative flex items-center gap-2 rounded-[var(--radius-pill)] px-3.5 py-2 text-sm font-medium transition-colors",
                   active
                     ? "text-primary-hover"
                     : "text-foreground-muted hover:bg-surface-muted hover:text-foreground",
@@ -68,7 +70,7 @@ export function AppNav({
                 {active && (
                   <motion.span
                     layoutId="app-nav-active"
-                    className="absolute inset-0 -z-10 rounded-[var(--radius)] bg-primary-soft"
+                    className="absolute inset-0 -z-10 rounded-[var(--radius-pill)] bg-primary-soft"
                     transition={{ type: "spring", stiffness: 400, damping: 34 }}
                   />
                 )}
@@ -144,7 +146,7 @@ export function AppNav({
       </nav>
 
       {open && (
-        <div className="border-t border-border bg-background px-4 pb-4 pt-2 md:hidden">
+        <div className="mx-auto mt-2 max-w-[1240px] rounded-[var(--radius-lg)] border border-border bg-surface p-3 shadow-[var(--shadow-float)] md:hidden">
           {MAIN_NAV.map((item) => {
             const Icon = item.icon;
             const active = isActivePath(pathname, item.href);
