@@ -50,7 +50,12 @@ export function DestinationRail({
   if (cities.length === 0) return null;
 
   return (
+    // Wrapped in the same .panel as every other band. Previously the scroller
+    // used a negative margin to bleed past the page gutter, so the rail's cards
+    // ran off the right edge while the panels above and below stayed inset —
+    // which is what made the sections look like different widths.
     <section className="page-shell pb-16 lg:pb-24">
+      <div className="panel px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
       <motion.div
         {...reveal}
         variants={riseIn}
@@ -103,7 +108,7 @@ export function DestinationRail({
       <div
         ref={scroller}
         onScroll={onScroll}
-        className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {cities.map((city, i) => (
           <Link
@@ -142,6 +147,7 @@ export function DestinationRail({
             </div>
           </Link>
         ))}
+      </div>
       </div>
     </section>
   );

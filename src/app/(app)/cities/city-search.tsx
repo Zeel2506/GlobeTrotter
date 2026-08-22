@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Search, SlidersHorizontal, MapPinOff } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Input, Select } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CityCard } from "@/components/city-card";
@@ -16,9 +16,6 @@ const SORTS = [
   { value: "costIndex", label: "Cheapest first" },
   { value: "name", label: "A–Z" },
 ] as const;
-
-const selectClass =
-  "h-10 rounded-[var(--radius)] border border-border-strong bg-surface px-3 text-sm";
 
 export function CitySearch() {
   const [q, setQ] = useState("");
@@ -111,10 +108,9 @@ export function CitySearch() {
           />
         </div>
 
-        <select
+        <Select
           value={country}
           onChange={(e) => changeFilter(setCountry, e.target.value)}
-          className={selectClass}
           aria-label="Filter by country"
         >
           <option value="">All countries</option>
@@ -123,12 +119,11 @@ export function CitySearch() {
               {c}
             </option>
           ))}
-        </select>
+        </Select>
 
-        <select
+        <Select
           value={region}
           onChange={(e) => changeFilter(setRegion, e.target.value)}
-          className={selectClass}
           aria-label="Filter by region"
         >
           <option value="">All regions</option>
@@ -137,12 +132,11 @@ export function CitySearch() {
               {r}
             </option>
           ))}
-        </select>
+        </Select>
 
-        <select
+        <Select
           value={sort}
           onChange={(e) => changeFilter(setSort, e.target.value)}
-          className={selectClass}
           aria-label="Sort cities"
         >
           {SORTS.map((s) => (
@@ -150,7 +144,7 @@ export function CitySearch() {
               {s.label}
             </option>
           ))}
-        </select>
+        </Select>
 
         {(q || country || region) && (
           <Button

@@ -14,7 +14,8 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Input, Select } from "@/components/ui/input";
+import { DateField } from "@/components/ui/date-field";
 import { Field, FormError } from "@/components/ui/field";
 import { api, ApiClientError, type CityRow, type TripCard, type Paged } from "@/lib/api";
 import { formatDate } from "@/lib/format";
@@ -123,11 +124,10 @@ export function AddToTripDialog({
           ) : (
             <>
               <Field label="Trip" htmlFor="trip" required>
-                <select
+                <Select
                   id="trip"
                   value={tripId}
                   onChange={(e) => selectTrip(e.target.value)}
-                  className="h-10 w-full rounded-[var(--radius)] border border-border-strong bg-surface px-3 text-sm"
                 >
                   <option value="">Choose a trip…</option>
                   {trips.map((t) => (
@@ -135,29 +135,29 @@ export function AddToTripDialog({
                       {t.name} ({formatDate(t.startDate)} – {formatDate(t.endDate)})
                     </option>
                   ))}
-                </select>
+                </Select>
               </Field>
 
               {selected && (
                 <div className="grid grid-cols-2 gap-3">
                   <Field label="Arrive" htmlFor="stop-start" required>
-                    <Input
+                    <DateField
                       id="stop-start"
-                      type="date"
                       value={startDate}
                       min={selected.startDate.slice(0, 10)}
                       max={selected.endDate.slice(0, 10)}
-                      onChange={(e) => setStartDate(e.target.value)}
+                      onChange={setStartDate}
+                      placeholder="Arrival"
                     />
                   </Field>
                   <Field label="Leave" htmlFor="stop-end" required>
-                    <Input
+                    <DateField
                       id="stop-end"
-                      type="date"
                       value={endDate}
                       min={startDate || selected.startDate.slice(0, 10)}
                       max={selected.endDate.slice(0, 10)}
-                      onChange={(e) => setEndDate(e.target.value)}
+                      onChange={setEndDate}
+                      placeholder="Departure"
                     />
                   </Field>
                 </div>

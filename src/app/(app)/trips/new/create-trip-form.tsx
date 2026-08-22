@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input, Textarea } from "@/components/ui/input";
+import { DateField } from "@/components/ui/date-field";
 import { Field, FormError } from "@/components/ui/field";
 import { ImageUploadField } from "@/components/ui/image-upload";
 import { api, ApiClientError } from "@/lib/api";
@@ -82,12 +83,11 @@ export function CreateTripForm() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Start date" htmlFor="startDate" error={issues.startDate} required>
-              <Input
+              <DateField
                 id="startDate"
-                type="date"
                 value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                required
+                onChange={setStartDate}
+                placeholder="Pick a start date"
               />
             </Field>
             <Field
@@ -96,13 +96,12 @@ export function CreateTripForm() {
               error={rangeInvalid ? "End date must be on or after the start date." : issues.endDate}
               required
             >
-              <Input
+              <DateField
                 id="endDate"
-                type="date"
                 value={endDate}
+                onChange={setEndDate}
                 min={startDate || undefined}
-                onChange={(e) => setEndDate(e.target.value)}
-                required
+                placeholder="Pick an end date"
               />
             </Field>
           </div>

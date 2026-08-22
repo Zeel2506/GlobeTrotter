@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { Save, Trash2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Field, FormError } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { Input, Select } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ImageUploadField } from "@/components/ui/image-upload";
@@ -145,18 +145,17 @@ export function ProfileForm({ user }: { user: ProfileUser }) {
             hint="Used for dates and number formatting across your trips."
             error={issues.languagePref}
           >
-            <select
+            <Select
               id="language"
               value={languagePref}
               onChange={(e) => setLanguagePref(e.target.value)}
-              className="h-10 w-full rounded-[var(--radius)] border border-border bg-surface px-3 text-[15px] outline-none transition-colors focus-visible:border-primary"
             >
               {LANGUAGES.map((l) => (
                 <option key={l.value} value={l.value}>
                   {l.label}
                 </option>
               ))}
-            </select>
+            </Select>
           </Field>
 
           <Field

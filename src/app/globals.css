@@ -152,12 +152,33 @@
     letter-spacing: -0.04em;
   }
 
-  /* The one serif-italic word in the headline, straight from EcoSphere. */
+  /* The one serif-italic word in the hero headline. */
   .display-accent {
     font-family: ui-serif, Georgia, "Times New Roman", serif;
     font-style: italic;
     font-weight: 600;
     letter-spacing: -0.02em;
+  }
+
+  /* Sans oblique for statement headlines. Diatype ships no italic cut, so this
+     is a synthesised slant of the same face — which is exactly the look: one
+     phrase leaning inside an otherwise upright line, no change of family. */
+  .display-oblique {
+    font-family: var(--font-diatype), ui-sans-serif, sans-serif;
+    font-style: italic;
+    font-synthesis: style;
+    font-weight: 400;
+  }
+
+  /* The large two-line statement band. Lighter and wider than .display-1 — it
+     is a sentence to read, not a headline to shout. */
+  .statement {
+    font-family: var(--font-diatype), ui-sans-serif, sans-serif;
+    font-size: clamp(1.9rem, 4.6vw, 3.6rem);
+    line-height: 1.16;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
   }
 
   .overline {

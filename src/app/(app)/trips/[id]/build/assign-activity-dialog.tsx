@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { DateField } from "@/components/ui/date-field";
 import { Field, FormError } from "@/components/ui/field";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CategoryChip } from "@/components/category-chip";
@@ -201,13 +202,13 @@ export function AssignActivityDialog({
           {selected && target && (
             <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Day" htmlFor="assign-date" required>
-                <Input
+                <DateField
                   id="assign-date"
-                  type="date"
                   value={date || target.date}
                   min={target.minDate}
                   max={target.maxDate}
-                  onChange={(e) => setDate(e.target.value)}
+                  onChange={setDate}
+                  clearable={false}
                 />
               </Field>
               <Field label="Start time" htmlFor="assign-time" hint="Optional.">

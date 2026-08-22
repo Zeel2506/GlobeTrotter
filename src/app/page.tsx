@@ -10,6 +10,7 @@ import {
 } from "@/components/landing/sections";
 import { DestinationRail } from "@/components/landing/destination-rail";
 import { HeroArc } from "@/components/landing/hero-arc";
+import { StatementBand } from "@/components/landing/statement-band";
 import { HeroSearch } from "@/components/landing/hero-search";
 import { prisma } from "@/lib/prisma";
 
@@ -57,6 +58,7 @@ export default async function LandingPage() {
           subtitle="The most-planned cities in the GlobeTrotter catalog."
           cities={topCities as never}
         />
+        <StatementBand />
         <PreviewBand />
         <DestinationRail
           title="Big trips, small budgets"

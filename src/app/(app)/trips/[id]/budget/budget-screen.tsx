@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Plus, Trash2, Receipt, CalendarRange, TrendingUp } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Input, Select } from "@/components/ui/input";
 import { Field, FormError } from "@/components/ui/field";
 import { Badge } from "@/components/ui/badge";
 import { StatCard } from "@/components/stat-card";
@@ -33,9 +33,6 @@ type ExpenseRow = {
 };
 
 type StopRow = { id: string; cityName: string; startDate: string; endDate: string };
-
-const selectClass =
-  "h-10 w-full rounded-[var(--radius)] border border-border-strong bg-surface px-3 text-sm";
 
 export function BudgetScreen({
   tripId,
@@ -175,23 +172,23 @@ export function BudgetScreen({
 
                       <div className="grid gap-3 sm:grid-cols-2">
                         <Field label="Stop" htmlFor="stopId" required>
-                          <select id="stopId" name="stopId" className={selectClass} required>
+                          <Select id="stopId" name="stopId" required>
                             {stops.map((s) => (
                               <option key={s.id} value={s.id}>
                                 {s.cityName}
                               </option>
                             ))}
-                          </select>
+                          </Select>
                         </Field>
 
                         <Field label="Category" htmlFor="category" required>
-                          <select id="category" name="category" className={selectClass} required>
+                          <Select id="category" name="category" required>
                             {EXPENSE_CATEGORIES.map((c) => (
                               <option key={c} value={c}>
                                 {c.charAt(0) + c.slice(1).toLowerCase()}
                               </option>
                             ))}
-                          </select>
+                          </Select>
                         </Field>
                       </div>
 

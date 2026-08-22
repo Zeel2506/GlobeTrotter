@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { DateField } from "@/components/ui/date-field";
 import { Field, FormError } from "@/components/ui/field";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
@@ -165,23 +166,23 @@ export function AddStopDialog({
           {selected && (
             <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Arrive" htmlFor="stop-start" required>
-                <Input
+                <DateField
                   id="stop-start"
-                  type="date"
                   value={startDate}
                   min={tripStart.slice(0, 10)}
                   max={tripEnd.slice(0, 10)}
-                  onChange={(e) => setStartDate(e.target.value)}
+                  onChange={setStartDate}
+                  placeholder="Arrival date"
                 />
               </Field>
               <Field label="Leave" htmlFor="stop-end" required>
-                <Input
+                <DateField
                   id="stop-end"
-                  type="date"
                   value={endDate}
                   min={startDate}
                   max={tripEnd.slice(0, 10)}
-                  onChange={(e) => setEndDate(e.target.value)}
+                  onChange={setEndDate}
+                  placeholder="Departure date"
                 />
               </Field>
             </div>

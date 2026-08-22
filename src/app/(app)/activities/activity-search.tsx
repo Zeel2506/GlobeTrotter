@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Search, SearchX, SlidersHorizontal } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Input, Select } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ActivityCard } from "@/components/activity-card";
@@ -19,9 +19,6 @@ const SORTS = [
   { value: "cost", label: "Cheapest first" },
   { value: "durationHours", label: "Shortest first" },
 ] as const;
-
-const selectClass =
-  "h-10 rounded-[var(--radius)] border border-border-strong bg-surface px-3 text-sm";
 
 export function ActivitySearch({ cityId }: { cityId?: string }) {
   const [q, setQ] = useState("");
@@ -111,10 +108,9 @@ export function ActivitySearch({ cityId }: { cityId?: string }) {
           aria-label="Maximum duration in hours"
         />
 
-        <select
+        <Select
           value={sort}
           onChange={(e) => changeFilter(setSort, e.target.value)}
-          className={selectClass}
           aria-label="Sort activities"
         >
           {SORTS.map((s) => (
@@ -122,7 +118,7 @@ export function ActivitySearch({ cityId }: { cityId?: string }) {
               {s.label}
             </option>
           ))}
-        </select>
+        </Select>
 
         {hasFilters && (
           <Button
