@@ -48,7 +48,7 @@ export function CityCard({
           src={city.imageUrl}
           name={city.name}
           variant="city"
-          className="aspect-[16/10] w-full transition-transform duration-[600ms] ease-[var(--ease)] group-hover:scale-[1.07]"
+          className="aspect-[16/10] w-full"
         />
 
         {/* Scrim keeps the badges legible over any photo, and deepens on hover. */}
@@ -119,7 +119,7 @@ export function CityCard({
           <Button
             variant="soft"
             size="sm"
-            className="mt-4 w-full transition-colors group-hover:bg-primary group-hover:text-primary-fg"
+            className="mt-4 w-full"
             onClick={() => onAddToTrip(city)}
           >
             <Plus />

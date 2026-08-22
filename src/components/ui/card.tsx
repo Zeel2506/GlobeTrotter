@@ -11,7 +11,7 @@ export function Card({
     <div
       className={cn(
         "rounded-[var(--radius-lg)] border border-border bg-surface shadow-[var(--shadow)]",
-        interactive && "hover-lift cursor-pointer",
+        interactive && "cursor-pointer",
         className,
       )}
       {...props}

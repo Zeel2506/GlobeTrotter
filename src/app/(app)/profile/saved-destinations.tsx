@@ -88,7 +88,7 @@ export function SavedDestinations({ initial }: { initial: CityRow[] }) {
                     <ImageFallback
                       src={city.imageUrl}
                       name={city.name}
-                      className="size-full transition-transform duration-[var(--dur)] group-hover:scale-105"
+                      className="size-full"
                     />
                     <Button
                       type="button"

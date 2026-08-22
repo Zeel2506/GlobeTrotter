@@ -122,7 +122,7 @@ export function DestinationRail({
               src={city.imageUrl}
               name={city.name}
               variant="city"
-              className="size-full transition-transform duration-[700ms] ease-[var(--ease)] group-hover:scale-110"
+              className="size-full"
             />
             {/* Heavier at the base so the overlaid title stays readable on any photo. */}
             <div

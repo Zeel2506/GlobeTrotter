@@ -43,7 +43,7 @@ export function TripCard({
             src={cover}
             name={trip.firstCityName ?? trip.name}
             variant="trip"
-            className="aspect-[16/10] w-full transition-transform duration-[600ms] ease-[var(--ease)] group-hover:scale-[1.07]"
+            className="aspect-[16/10] w-full"
           />
           <div
             aria-hidden

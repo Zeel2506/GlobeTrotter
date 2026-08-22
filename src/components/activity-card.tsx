@@ -38,7 +38,7 @@ export function ActivityCard({
           src={activity.imageUrl}
           name={activity.name}
           variant="activity"
-          className="aspect-[16/10] w-full transition-transform duration-[600ms] ease-[var(--ease)] group-hover:scale-[1.07]"
+          className="aspect-[16/10] w-full"
         />
       </button>
 
