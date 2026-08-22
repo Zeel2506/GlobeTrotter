@@ -74,3 +74,20 @@ mid-demo is unrecoverable without DB access.
 ### D-15 · Repo layout
 The Next.js app is scaffolded at the repository root (not in a subfolder) so Vercel needs no root-directory
 override. `hackathon-brief/` is kept as reference material; `starter-files/` is consumed and deleted.
+
+### D-16 · Undated expenses are spread across their stop, not dumped on day one
+Found during W3 smoke-testing: with every hotel and flight attributed to the trip's first day, the
+per-day chart showed a single $2,096 spike and twelve flat days, and that one artificial spike was the
+only thing tripping the over-budget flag. An undated expense is one that covers the whole stop
+("hotel, 4 nights"), so it is now divided evenly across that stop's days. Totals are unchanged and
+`sum(perDay) === totals.grand` still holds; the chart now reads as a real spending pattern.
+
+### D-17 · `middleware.ts` kept despite the Next 16 deprecation notice
+Next 16 asks for `proxy.ts` instead. The file works as-is, the starter and the team plan both refer to
+it by name, and renaming it mid-hackathon buys nothing. Revisit after the event.
+
+### D-18 · Community accounts in the seed
+Twelve extra users with 22 trips between them, deterministic (no `Math.random`, so a re-seed
+reproduces the same charts). Without them the admin analytics screen showed one month of history and
+every city tied at a single stop, which reads as a broken screen rather than a new product.
+Their emails all end `@globetrotter.demo` and are deleted wholesale on re-seed.
