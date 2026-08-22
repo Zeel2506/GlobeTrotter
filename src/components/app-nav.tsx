@@ -47,7 +47,7 @@ export function AppNav({
         {/* Icon-led nav, the way travel apps signpost their sections. The active
             pill is one shared element that slides between items rather than four
             that fade — the movement is what makes the switch feel deliberate. */}
-        <div className="mx-2 hidden flex-1 items-center gap-1 md:flex">
+        <div className="mx-2 hidden flex-1 items-center justify-center gap-1 md:flex">
           {MAIN_NAV.map((item) => {
             const Icon = item.icon;
             const active = isActivePath(pathname, item.href);

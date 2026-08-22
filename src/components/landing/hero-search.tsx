@@ -12,6 +12,7 @@ import {
   Wallet,
   Share2,
 } from "lucide-react";
+import { DateField } from "@/components/ui/date-field";
 import { POPULAR_SEARCHES } from "@/config/landing";
 import { EASE } from "@/lib/motion";
 import { cn } from "@/lib/cn";
@@ -60,6 +61,11 @@ function FieldCell({
 
 const cellInput =
   "mt-1.5 w-full bg-transparent text-[17px] font-semibold leading-tight outline-none placeholder:font-normal placeholder:text-foreground-subtle";
+
+/** The DateField trigger, stripped back to sit inside a segmented cell: no
+ *  border, no shadow, no fixed height — the cell already provides all of that. */
+const cellDateTrigger =
+  "mt-1.5 h-auto border-0 bg-transparent p-0 text-[17px] font-semibold shadow-none hover:border-0 focus-visible:ring-0";
 
 /**
  * The planner widget: icon tabs, one row of segmented labelled fields, then a
@@ -158,15 +164,20 @@ export function HeroSearch() {
               />
             </FieldCell>
             <FieldCell label="Start date">
-              <input type="date" value={start} onChange={(e) => setStart(e.target.value)} className={cellInput} />
+              <DateField
+                value={start}
+                onChange={setStart}
+                placeholder="Add date"
+                className={cellDateTrigger}
+              />
             </FieldCell>
             <FieldCell label="End date">
-              <input
-                type="date"
+              <DateField
                 value={end}
                 min={start || undefined}
-                onChange={(e) => setEnd(e.target.value)}
-                className={cellInput}
+                onChange={setEnd}
+                placeholder="Add date"
+                className={cellDateTrigger}
               />
             </FieldCell>
           </>

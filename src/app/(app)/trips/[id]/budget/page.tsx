@@ -32,7 +32,7 @@ export default async function BudgetPage({ params }: { params: Promise<{ id: str
   });
 
   return (
-    <div className="page-shell max-w-[1120px]">
+    <div className="page-shell"><div className="mx-auto max-w-[1120px]">
       <Button asChild variant="ghost" size="sm" className="mb-2 -ml-2">
         <Link href={`/trips/${id}`}>
           <ArrowLeft />
@@ -65,6 +65,7 @@ export default async function BudgetPage({ params }: { params: Promise<{ id: str
           date: e.date ? e.date.toISOString().slice(0, 10) : null,
         }))}
       />
+    </div>
     </div>
   );
 }

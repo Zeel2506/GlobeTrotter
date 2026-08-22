@@ -80,7 +80,7 @@ export default async function PublicTripPage({ params }: Props) {
       </header>
 
       <main className="flex-1 pb-20">
-        <div className="page-shell max-w-[1120px] pt-8">
+        <div className="page-shell pt-8" style={{ maxWidth: 1120 }}>
           <UnshareBanner tripId={trip.id} isOwner={isOwner} />
 
           <section className="relative mb-8 overflow-hidden rounded-[var(--radius-xl)] border border-border">

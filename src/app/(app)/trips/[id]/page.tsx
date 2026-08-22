@@ -34,7 +34,7 @@ export default async function TripPage({ params }: { params: Promise<{ id: strin
   const cover = trip.coverPhotoUrl ?? stops[0]?.city.imageUrl ?? null;
 
   return (
-    <div className="page-shell max-w-[1120px]">
+    <div className="page-shell"><div className="mx-auto max-w-[1120px]">
       <section className="relative mb-8 overflow-hidden rounded-[var(--radius-xl)] border border-border">
         <ImageFallback
           src={cover}
@@ -96,6 +96,7 @@ export default async function TripPage({ params }: { params: Promise<{ id: strin
       )}
 
       <ItineraryViews days={days} />
+    </div>
     </div>
   );
 }
