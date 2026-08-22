@@ -1,26 +1,202 @@
 @import "tailwindcss";
 
+/* GlobeTrotter design tokens — docs/DESIGN_SYSTEM.md §2.
+   Light theme only. The starter's prefers-color-scheme:dark block is deliberately
+   absent: a dark mode would contradict the hard light-theme requirement. */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Foundation — warm sand neutrals, never pure white or pure black */
+  --background: #fbfaf8;
+  --surface: #ffffff;
+  --surface-muted: #f4f2ee;
+  --border: #e7e3dc;
+  --border-strong: #d5cfc4;
+  --foreground: #1c1917;
+  --foreground-muted: #57534e;
+  --foreground-subtle: #8a8078;
+
+  /* Brand — ocean teal, frozen */
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
+  --primary-soft: #ccfbf1;
+  --primary-fg: #ffffff;
+  --accent: #f97316;
+  --accent-soft: #ffedd5;
+
+  /* Semantic — red is reserved for over-budget and destructive only */
+  --success: #16a34a;
+  --success-soft: #dcfce7;
+  --warning: #ca8a04;
+  --warning-soft: #fef9c3;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 1px 2px rgb(28 25 23 / 0.05);
+  --shadow: 0 2px 8px -2px rgb(28 25 23 / 0.08), 0 1px 3px rgb(28 25 23 / 0.04);
+  --shadow-lg: 0 12px 32px -8px rgb(28 25 23 / 0.14);
+  --shadow-hover: 0 16px 40px -12px rgb(13 148 136 / 0.22);
+
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-micro: 150ms;
+  --dur: 240ms;
+  --dur-entrance: 420ms;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-fg: var(--primary-fg);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow);
+  --shadow-lg: var(--shadow-lg);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  /* Money and counts must align in columns — see DESIGN_SYSTEM.md §3 */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--primary-soft);
+    color: var(--foreground);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .display-1 {
+    font-family: var(--font-jakarta), sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .overline {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Standard page column. Reading-heavy pages use max-w-[1120px] instead. */
+  .page-shell {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  .hover-lift {
+    transition:
+      transform var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+/* Signature moment #2: over-budget day pulse. Runs twice then holds a static
+   red — an endless animation reads as a broken page during a demo. */
+@keyframes overbudget-pulse {
+  0%,
+  100% {
+    background-color: var(--danger);
+  }
+  50% {
+    background-color: var(--danger-soft);
+  }
+}
+
+.animate-overbudget {
+  animation: overbudget-pulse 900ms var(--ease) 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
 }
