@@ -42,7 +42,7 @@ export function SavedDestinations({ initial }: { initial: CityRow[] }) {
   }
 
   return (
-    <Card className="p-6">
+    <Card id="saved" className="scroll-mt-24 p-6">
       <div className="flex items-center justify-between gap-3">
         <div>
           <h2 className="text-lg font-semibold">Saved destinations</h2>

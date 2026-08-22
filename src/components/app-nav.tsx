@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
+import { motion } from "framer-motion";
 import { Globe2, Plus, Menu, X, User, Heart, Shield, LogOut } from "lucide-react";
 import { MAIN_NAV, isActivePath } from "@/config/nav";
 import { Button } from "@/components/ui/button";
@@ -45,8 +46,12 @@ export function AppNav({
           <span className="hidden text-[17px] tracking-tight sm:inline">GlobeTrotter</span>
         </Link>
 
+        {/* Icon-led nav, the way travel apps signpost their sections. The active
+            pill is one shared element that slides between items rather than four
+            that fade — the movement is what makes the switch feel deliberate. */}
         <div className="mx-2 hidden flex-1 items-center gap-1 md:flex">
           {MAIN_NAV.map((item) => {
+            const Icon = item.icon;
             const active = isActivePath(pathname, item.href);
             return (
               <Link
@@ -54,12 +59,20 @@ export function AppNav({
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "rounded-[var(--radius)] px-3 py-2 text-sm font-medium transition-colors",
+                  "relative flex items-center gap-2 rounded-[var(--radius)] px-3 py-2 text-sm font-medium transition-colors",
                   active
-                    ? "bg-primary-soft text-primary-hover"
+                    ? "text-primary-hover"
                     : "text-foreground-muted hover:bg-surface-muted hover:text-foreground",
                 )}
               >
+                {active && (
+                  <motion.span
+                    layoutId="app-nav-active"
+                    className="absolute inset-0 -z-10 rounded-[var(--radius)] bg-primary-soft"
+                    transition={{ type: "spring", stiffness: 400, damping: 34 }}
+                  />
+                )}
+                <Icon className="size-4" />
                 {item.label}
               </Link>
             );
