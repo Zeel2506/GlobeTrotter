@@ -233,6 +233,18 @@
 
 }
 
+/* Hero arc card flip.
+   Kept in CSS rather than framer-motion because MotionConfig reducedMotion="user"
+   strips transform animations, and the flip is the card's whole purpose — it is
+   how the destination name is revealed. */
+.card-flip {
+  transition: transform 620ms var(--ease);
+}
+
+.group:hover .card-flip {
+  transform: rotateY(180deg);
+}
+
 /* The soft pastel wash behind the EcoSphere hero. Pure CSS — nothing to load. */
 .hero-aura {
   background:
@@ -265,5 +277,11 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* One exception: the arc card flip is a user-initiated, contained reveal and
+     is the only way to see the destination name. Shortened rather than removed. */
+  .card-flip {
+    transition-duration: 220ms !important;
   }
 }

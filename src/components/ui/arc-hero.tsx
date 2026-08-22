@@ -13,7 +13,6 @@
 // the whole component now: geometry + hover, no springs, no motion values, no
 // listeners. It renders identically on first paint and never moves on its own.
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 
 export type ArcCard = { src: string; label: string };
 
@@ -41,11 +40,15 @@ function FlipCard({
       }}
       className="group cursor-pointer"
     >
-      <motion.div
-        className="relative h-full w-full"
+      {/* The flip is CSS, not framer-motion, on purpose: <MotionConfig
+          reducedMotion="user"> strips transform animations, which silently
+          killed a whileHover rotateY for anyone with the OS preference set.
+          A CSS transform is outside Framer's control, so the card still turns.
+          The `card-flip` transition is exempted from the global reduced-motion
+          rule in globals.css — see the note there. */}
+      <div
+        className="card-flip relative h-full w-full"
         style={{ transformStyle: "preserve-3d" }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
-        whileHover={{ rotateY: 180 }}
       >
         <div
           className="absolute inset-0 h-full w-full overflow-hidden rounded-[14px] bg-surface-muted shadow-lg"
@@ -65,7 +68,7 @@ function FlipCard({
             {label}
           </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
