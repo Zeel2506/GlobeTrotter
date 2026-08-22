@@ -238,8 +238,13 @@ export default function ScrollMorphHero({
     <div ref={containerRef} className="relative h-full w-full overflow-hidden">
       <div className="flex h-full w-full flex-col items-center justify-center">
         {/* Intro copy — fades out as the ring morphs into the arc. */}
-        <div className="pointer-events-none absolute top-1/2 z-0 flex -translate-y-1/2 flex-col items-center justify-center px-4 text-center">
-          <motion.h1
+        {/* Decorative, not a heading: it animates to opacity 0, and the page's
+            real <h1> lives below the canvas where it stays visible. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-1/2 z-0 flex -translate-y-1/2 flex-col items-center justify-center px-4 text-center"
+        >
+          <motion.p
             initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
             animate={
               introPhase === "circle" && morphValue < 0.5
@@ -250,7 +255,7 @@ export default function ScrollMorphHero({
             className="display-1 max-w-3xl"
           >
             {title}
-          </motion.h1>
+          </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
             animate={

@@ -19,9 +19,12 @@ import { EASE } from "@/lib/motion";
 export function MorphHero({ cards }: { cards: MorphCard[] }) {
   return (
     <section className="relative">
+      {/* Pulled above the section so the wash continues up behind the floating
+          navbar. Anchored at top-0 it started exactly where the sticky header
+          ended, drawing a hard grey seam across the page. */}
       <div
         aria-hidden
-        className="hero-aura pointer-events-none absolute inset-x-0 top-0 -z-10 h-[760px]"
+        className="hero-aura pointer-events-none absolute inset-x-0 -top-28 -z-10 h-[860px]"
       />
 
       <div className="h-[clamp(440px,58vh,620px)] w-full">
@@ -40,8 +43,17 @@ export function MorphHero({ cards }: { cards: MorphCard[] }) {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE, delay: 0.4 }}
-        className="page-shell flex flex-col items-center gap-8 pb-4 text-center"
+        className="page-shell flex flex-col items-center gap-7 pb-4 text-center"
       >
+        {/* The real, permanent <h1>. The one inside the morph canvas animates to
+            opacity 0, so the page would otherwise be left with a heading that
+            disappears — bad for a screen reader and for the crawler. This also
+            fills the gap the arc leaves under its dip. */}
+        <h1 className="display-1 max-w-4xl">
+          Plan multi-city trips,{" "}
+          <span className="display-accent text-primary">beautifully</span>
+        </h1>
+
         <p className="max-w-2xl text-[17px] leading-[1.75] text-foreground-muted">
           {HERO.subtitle}
         </p>
