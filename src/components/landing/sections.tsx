@@ -24,7 +24,7 @@ import { cn } from "@/lib/cn";
 /** The CSS-built itinerary visual, promoted to its own band under the hero. */
 export function PreviewBand() {
   return (
-    <section className="page-shell pb-16 lg:pb-24">
+    <section id="builder" className="page-shell scroll-mt-28 pb-10 lg:pb-14">
       <div className="panel grid items-center gap-10 px-6 py-14 sm:px-10 lg:grid-cols-[.95fr_1.05fr] lg:px-14 lg:py-20">
         <motion.div {...reveal} variants={riseIn}>
           <p className="overline mb-3 text-primary">The itinerary builder</p>
@@ -56,7 +56,7 @@ export function PreviewBand() {
 
 export function StatsStrip() {
   return (
-    <section className="page-shell pb-16 lg:pb-24">
+    <section className="page-shell pb-10 lg:pb-14">
       {/* A white panel floating on the grey canvas — the unit MakeMyTrip stacks
           its whole page out of. */}
       <motion.div
@@ -79,7 +79,7 @@ export function StatsStrip() {
 
 export function FeatureBento() {
   return (
-    <section id="features" className="page-shell scroll-mt-28 pb-16 lg:pb-24">
+    <section id="features" className="page-shell scroll-mt-28 pb-10 lg:pb-14">
       <div className="panel px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
       <motion.div {...reveal} variants={riseIn} className="mb-12 max-w-2xl">
         <p className="overline mb-3 text-primary">Everything in one place</p>
@@ -124,7 +124,7 @@ export function FeatureBento() {
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="page-shell scroll-mt-28 pb-16 lg:pb-24">
+    <section id="how-it-works" className="page-shell scroll-mt-28 pb-10 lg:pb-14">
       <div className="panel px-6 py-14 sm:px-10 lg:px-14 lg:py-20">
         <motion.div {...reveal} variants={riseIn} className="mb-14 max-w-2xl">
           <p className="overline mb-3 text-primary">How it works</p>
@@ -160,7 +160,7 @@ export function HowItWorks() {
 
 export function CtaBand() {
   return (
-    <section className="page-shell pb-16 pt-4 lg:pb-24">
+    <section className="page-shell pb-10 pt-2 lg:pb-14">
       <motion.div
         {...reveal}
         variants={riseIn}

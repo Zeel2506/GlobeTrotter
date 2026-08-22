@@ -30,7 +30,10 @@ export const ADMIN_NAV: NavItem[] = [
   { href: "/admin/users", label: "Users", icon: Users },
 ];
 
+// Landing anchors, in the order the sections appear on the page.
 export const MARKETING_NAV = [
+  { href: "#destinations", label: "Destinations" },
+  { href: "#builder", label: "Itinerary builder" },
   { href: "#features", label: "Features" },
   { href: "#how-it-works", label: "How it works" },
 ];

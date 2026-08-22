@@ -24,11 +24,13 @@ export function DestinationRail({
   subtitle,
   cities,
   viewAllHref = "/cities",
+  id,
 }: {
   title: string;
   subtitle?: string;
   cities: CityRow[];
   viewAllHref?: string;
+  id?: string;
 }) {
   const scroller = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
@@ -54,7 +56,7 @@ export function DestinationRail({
     // used a negative margin to bleed past the page gutter, so the rail's cards
     // ran off the right edge while the panels above and below stayed inset —
     // which is what made the sections look like different widths.
-    <section className="page-shell pb-16 lg:pb-24">
+    <section id={id} className="page-shell scroll-mt-28 pb-10 lg:pb-14">
       <div className="panel px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
       <motion.div
         {...reveal}

@@ -36,7 +36,7 @@ export function HeroArc({ cards }: { cards: ArcCard[] }) {
       >
         <h1 className="display-1 max-w-4xl">
           Plan multi-city trips,{" "}
-          <span className="display-accent text-primary">beautifully</span>
+          <span className="display-oblique text-primary">beautifully</span>
         </h1>
 
         <p className="max-w-2xl text-[17px] leading-[1.75] text-foreground-muted">

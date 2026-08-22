@@ -167,7 +167,10 @@
     font-family: var(--font-diatype), ui-sans-serif, sans-serif;
     font-style: italic;
     font-synthesis: style;
-    font-weight: 400;
+    /* Inherits the surrounding weight on purpose: 400 inside .statement, 800
+       inside the hero's .display-1. Pinning it to 400 made the hero's leaning
+       word look thin against the upright words beside it. */
+    font-weight: inherit;
   }
 
   /* The large two-line statement band. Lighter and wider than .display-1 — it

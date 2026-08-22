@@ -10,7 +10,7 @@ import { reveal, riseIn } from "@/lib/motion";
  */
 export function StatementBand() {
   return (
-    <section className="page-shell pb-16 lg:pb-24">
+    <section className="page-shell pb-10 lg:pb-14">
       <motion.div {...reveal} variants={riseIn} className="panel px-6 py-20 text-center lg:py-28">
         <h2 className="statement mx-auto max-w-4xl">
           One workspace for cities,{" "}

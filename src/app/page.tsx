@@ -46,7 +46,7 @@ export default async function LandingPage() {
           }))}
         />
 
-        <div className="page-shell pb-16 pt-10 lg:pb-24">
+        <div className="page-shell pb-10 pt-8 lg:pb-14">
           <div className="mx-auto max-w-5xl">
             <HeroSearch />
           </div>
@@ -54,6 +54,7 @@ export default async function LandingPage() {
 
         <StatsStrip />
         <DestinationRail
+          id="destinations"
           title="Handpicked destinations"
           subtitle="The most-planned cities in the GlobeTrotter catalog."
           cities={topCities as never}
